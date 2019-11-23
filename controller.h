@@ -16,16 +16,17 @@ class Controller final{
     std::unique_ptr<Display> display;
     int currentMultiplicity;    //number of times a command is executed
     std::string currentCommand; //command name, related to that in the list
-    std::vector<std::string> &commandList;
+    std::string currentCommandArg;  //file name for norandom and sequence
+    std::vector<std::string> commandList;
 
   public:
     Controller(); 
     ~Controller();
 
-    void run();
+    bool run(std::string line);
   
   private:
-    bool readCommand(std::string com);
+    bool readCommand(std::string line);
     void executeCommand();
 
 };
