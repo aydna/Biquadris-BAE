@@ -1,12 +1,13 @@
 #include "display.h"
+#include "board.h"
+#include "game.h"
 #include <vector>
 #include <utility>
 #include <memory>
 #include <iostream>
 
 
-Display::Display(Game* game) {
-    my_game = game;
+Display::Display(Game* game):my_game{game}{
     
     p1.boardSize = std::pair<int,int>(18,11);
     p2.boardSize = std::pair<int,int>(18,11);
@@ -20,7 +21,7 @@ Display::Display(Game* game) {
     for (int row = 0; row < p1.boardSize.first; row++) {
         std::vector<char> newRow;
         for (int col = 0; col < p1.boardSize.second; col++) {
-            newRow.emplace_back(".");
+            newRow.emplace_back(' ');
         }
         p1.grid.emplace_back(newRow);
     }
@@ -28,36 +29,36 @@ Display::Display(Game* game) {
     p2.grid = p1.grid;
 }
 
-void Display::update() {
+void Display::updateDisplay() {
 
     // clear board (for now)
     for (int row = 0; row < p1.boardSize.first; ++row){
         for (int col = 0; col < p1.boardSize.second; ++col){
-            p1.grid[row][col] = ".";
-            p2.grid[row][col] = ".";
+            p1.grid[row][col] = ' ';
+            p2.grid[row][col] = ' ';
         }
     }
 
     //for p1 board
-    Board* b1 = game->getBoard(1);
-    std::vector<unique_ptr<Block>> p1Blocks = b1->getBlocks();
+    std::unique_ptr<Board>& b1 = my_game->getBoard(1);
+    std::vector<std::unique_ptr<Block>>& p1Blocks = b1->getBlocks();
 
     for (auto &b : p1Blocks) {
-        char curr_color = b.getColor();
-        for (auto p : p1Blocks->pixels) {
+        char curr_color = b->getColor();
+        for (auto p : b->getPixels()) {
             p1.grid[p.first][p.second] = curr_color;
         }
     }
 
 
     //for p2 board
-    Board* b2 = game->getBoard(2);
-    std::vector<unique_ptr<Block>> p2Blocks = b2->getBlocks();
+    std::unique_ptr<Board>& b2 = my_game->getBoard(2);
+    std::vector<std::unique_ptr<Block>>& p2Blocks = b2->getBlocks();
 
     for (auto &b : p2Blocks) {
-        char curr_color = b.getColor();
-        for (auto p : p2Blocks->pixels) {
-            p1.grid[p.first][p.second] = curr_color;
+        char curr_color = b->getColor();
+        for (auto p : b->getPixels()) {
+            p2.grid[p.first][p.second] = curr_color;
         }
     }
     
@@ -65,23 +66,26 @@ void Display::update() {
 
 
 std::ostream &operator <<(std::ostream &out, const Display &d) {
-    out << "Level:    " << d.p1.level << "      "; // 6 spaces between the boards
+    out << std::endl << std::endl;
+    out << " Level:    " << d.p1.level << "      "; // 6 spaces between the boards
     out << "Level:    " << d.p2.level << std::endl;
-    out << "Score:    " << d.p1.level << "      ";
+    out << " Score:    " << d.p1.level << "      ";
     out << "Score:    " << d.p2.level << std::endl;
-    out << "-----------      -----------";
+    out << " -----------      -----------" << std::endl;
 
     for (int row = 0; row < d.p1.boardSize.first; row++) {
+        out << "|";
         for (int col = 0; col < d.p1.boardSize.second; col++) {
             out << d.p1.grid[row][col];
         }
-        out << "      ";
+        out << "|    |";
         for (int col = 0; col < d.p2.boardSize.second; col++) {
             out << d.p2.grid[row][col];
         }
+        out << "|";
         out << std::endl;
     }
-    
+    out << " -----------      -----------";
     //out << "Next:" for later impl
     return out;
 }

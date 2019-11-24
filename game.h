@@ -9,7 +9,7 @@
 class Game {
     // Private fields
     std::pair<int,int> boardSize;
-    int currPlayerTurn;
+    int playerTurn;
     std::unique_ptr<Board> b1;
     std::unique_ptr<Board> b2;
     public:
@@ -17,7 +17,7 @@ class Game {
     Game();
     int getPlayer(); //gets curr player's turn
     bool gameOver();
-    Board* getBoard(int player);
+    std::unique_ptr<Board>& getBoard(int player);
     void levelUp(int lvl);
     void drop();
     void rotateCW(int mult);

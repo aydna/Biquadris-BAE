@@ -6,7 +6,7 @@
 
 
 Game::Game() :
-    boardSize{std::pair<int,int>(18,11)}, currPlayerTurn{1}, b1{new Board}, b2{new Board} {
+    boardSize{std::pair<int,int>(18,11)}, playerTurn{1}, b1{std::make_unique<Board>(1)}, b2{std::make_unique<Board>(2)} {
         b1->spawnBlock();
     }
 
@@ -22,7 +22,7 @@ bool Game::gameOver() {
     return b2->gameOver();
 }
 
-Board* Game::getBoard(int player) {
+std::unique_ptr<Board>& Game::getBoard(int player) {
     if (player == 1) {
         return b1;
     }
@@ -33,10 +33,10 @@ Board* Game::getBoard(int player) {
 
 void Game::levelUp(int lvl) {
     if (playerTurn == 1) {
-        b1->levelUp(lvl);
+        //b1->levelUp(lvl);
     }
     else {
-        b2->levelUp(lvl);
+        //b2->levelUp(lvl);
     }
 }
 
@@ -102,10 +102,10 @@ void Game::moveDown(int mult) {
 
 void Game::makeSpecial(std::string type, int mult) {
     if (playerTurn == 1) {
-        b2->makeSpecial(mult); // apply special board to opponent's board
+        //b2->makeSpecial(mult); // apply special board to opponent's board
     }
     else {
-        b1->makeSpecial(mult);
+        //b1->makeSpecial(mult);
     }
 }
 

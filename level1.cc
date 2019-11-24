@@ -1,5 +1,5 @@
 //level1.cc
-#include "level0.h"
+#include "level1.h"
 #include <memory>
 #include <string>
 #include <cstdlib>
@@ -21,23 +21,23 @@ Level1::~Level1() {}
 
 
 std::unique_ptr<Block> Level1::spawnBlock() {
-    int gen = rand();
-    if (gen < 1 * RAND_MAX / 12 {
+    int gen = rand() % 12;
+    if (gen < 1) {
         return std::make_unique<BlockS>();
 
-    } else if (gen < 2 * RAND_MAX / 12 {
+    } else if (gen < 2) {
         return std::make_unique<BlockZ>();
 
-    } else if (gen < 2 * RAND_MAX / 6 {
+    } else if (gen < 4) {
         return std::make_unique<BlockI>();
 
-    } else if (gen < 3 * RAND_MAX / 6 {
+    } else if (gen < 6) {
         return std::make_unique<BlockJ>();
 
-    } else if (gen < 4 * RAND_MAX / 6 {
+    } else if (gen < 8) {
         return std::make_unique<BlockL>();
 
-    } else if (gen < 5 * RAND_MAX / 6 {
+    } else if (gen < 10) {
         return std::make_unique<BlockO>();
 
     } else {

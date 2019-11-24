@@ -28,6 +28,8 @@ class Controller final{
   private:
     bool readCommand(std::string line);
     void executeCommand();
+  
+  friend std::ostream &operator <<(std::ostream &out, const Controller &c); //a friend
 
 };
 

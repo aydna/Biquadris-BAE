@@ -4,16 +4,16 @@
 #include <utility>
 #include <memory>
 #include <iostream>
-#include "game.h"
+//#include "game.h"
 
+class Game;
 
 struct Player {
-    private:
     std::pair<int,int> boardSize;
     std::vector<std::vector<char>> grid;
     int score;
     int level;
-}
+};
 
 class Display {
     protected:

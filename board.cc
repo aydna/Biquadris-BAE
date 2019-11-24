@@ -3,13 +3,14 @@
 #include <utility>
 #include "block.h"
 #include "level.h"
-#include "level_test.h"
+#include "level0.h"
+#include "level1.h"
 #include "display.h"
 #include "board.h"
 
 Board::Board(int boardNum): 
     boardNum{boardNum}, 
-    currLevel{std::make_unique<LevelTest>()}{} //change to Level0
+    currLevel{std::make_unique<Level1>()}{} //change to Level0
 
 std::vector<std::unique_ptr<Block>> &Board::getBlocks(){
     return blocks;
@@ -188,6 +189,7 @@ void Board::rotateCW(int times){
     blocks.back()->setPixels(pixels);
 }
 
+bool Board::gameOver(){ return false; }
 
 void Board::rotateCCW(int times){
     rotateCW(times * 3);

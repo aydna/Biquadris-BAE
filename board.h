@@ -21,6 +21,7 @@ class Board{
         void moveDown(int distance);
         void rotateCW(int times);
         void rotateCCW(int times);
+        bool gameOver();
         void drop();
 };
 
