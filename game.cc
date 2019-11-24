@@ -42,10 +42,10 @@ void Game::levelUp(int lvl) {
 
 void Game::levelDown(int lvl) {
     if (playerTurn == 1) {
-        b1->levelDown(lvl);
+        //b1->levelDown(lvl);
     }
     else {
-        b2->levelDown(lvl);
+        //b2->levelDown(lvl);
     }
 }
 
