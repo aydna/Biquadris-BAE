@@ -31,13 +31,13 @@ void Display::update(const std::vector<std::unique_ptr<Block>> &blocks1, const s
     }
     // fills with blocks 
     for (auto const& b : blocks1){
-        for (auto p : b->pixels){
-            grid1[p.first][p.second] = 'O'; //blocks will have a Char class to be added
+        for (auto p : b->getPixels()){
+            grid1[p.first][p.second] = b->getColor();
         }
     }
     for (auto const& b : blocks2){
-        for (auto p : b->pixels){
-            grid2[p.first][p.second] = 'O';
+        for (auto p : b->getPixels()){
+            grid2[p.first][p.second] = b->getColor();
         }
     }
 }

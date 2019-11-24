@@ -8,7 +8,7 @@
 
 class Display{
     // also figure out the 3 reserve rows problem
-    std::pair<int,int> boardSize= std::pair<int,int>(18,10); // (rows, cols)
+    std::pair<int,int> boardSize= std::pair<int,int>(18,11); // (rows, cols)
     std::vector<std::vector<char>> grid1;
     std::vector<std::vector<char>> grid2;
     

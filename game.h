@@ -17,8 +17,11 @@ class Game{
     public:
         Game(Display *d);
         void spawnBlock();
-        void moveLeft();
-        void moveRight();
+        void moveRight(int distance);
+        void moveLeft(int distance);
+        void moveDown(int distance);
+        void rotateCW(int times);
+        void rotateCCW(int times);
         void drop();
 };
 
