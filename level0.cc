@@ -12,3 +12,4 @@ Level0::~Level0() {}
 std::unique_ptr<Block> Level0::spawnBlock() {
     return std::make_unique<BlockO>();
 }
+

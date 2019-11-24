@@ -18,6 +18,7 @@ Level1::Level1(std::string file, bool useRandom):
 Level1::~Level1() {}
 
 
+
 std::unique_ptr<Block> Level1::spawnBlock() {
     int gen = rand();
     if (gen < 1 * RAND_MAX / 12 {
