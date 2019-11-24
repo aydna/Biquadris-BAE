@@ -3,20 +3,16 @@
 #include "block.h"
 
 
-Block::Block(std::vector<std::pair<int,int>> pixels): pixels{pixels}{}
+Block::Block(std::vector<std::pair<int,int>> pixels, char color): pixels{pixels}, color{color}{}
 
-void Block::moveRight(){
-    for (auto &p : pixels){
-        ++p.second;
-    }
+std::vector<std::pair<int,int>> Block::getPixels(){
+    return pixels;
 }
-void Block::moveLeft(){
-    for (auto &p : pixels){
-        --p.second;
-    }
+
+void Block::setPixels(std::vector<std::pair<int,int>> newPixels){
+    pixels = newPixels;
 }
-void Block::drop(int distance){
-    for (auto &p : pixels){
-        p.first += distance;
-    }
+
+char Block::getColor(){
+    return color;
 }
