@@ -7,8 +7,8 @@
 
 
 //these methods are gabage, ill FIX IT later -Botao
-Game::Game(Display *d): 
-    d{d},
+Game::Game(): 
+    //d{d},
     playerTurn{0}, 
     b1{std::make_unique<Board>(0)},
     b2{std::make_unique<Board>(1)}
@@ -21,7 +21,7 @@ void Game::spawnBlock(){
     else if (playerTurn == 1){
         b2->spawnBlock();
     }
-    d->update(b1->getBlocks(),b2->getBlocks());
+    //d->update(b1->getBlocks(),b2->getBlocks());
 }
 
 void Game::moveLeft(){
@@ -31,7 +31,7 @@ void Game::moveLeft(){
     else if (playerTurn == 1){
         b2->moveLeft();
     }
-    d->update(b1->getBlocks(),b2->getBlocks());
+    //d->update(b1->getBlocks(),b2->getBlocks());
 }
 
 void Game::moveRight(){
@@ -41,7 +41,7 @@ void Game::moveRight(){
     else if (playerTurn == 1){
         b2->moveRight();
     }
-    d->update(b1->getBlocks(),b2->getBlocks());
+    //d->update(b1->getBlocks(),b2->getBlocks());
 }
 
 void Game::drop(){
@@ -53,5 +53,5 @@ void Game::drop(){
         b2->drop();
         playerTurn = 0;
     }
-    d->update(b1->getBlocks(),b2->getBlocks());
+    //d->update(b1->getBlocks(),b2->getBlocks());
 }

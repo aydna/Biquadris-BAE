@@ -7,7 +7,7 @@
 #include "display.h"
 
 class Game{
-    Display *d;
+    //Display *d;
     // also figure out the 3 reserve rows problem
     std::pair<int,int> boardSize = std::pair<int,int>(18,11); // change to solid numbers
     int playerTurn;
@@ -15,7 +15,7 @@ class Game{
     std::unique_ptr<Board> b2;
     //next block???? Display needs to know before it spawns? Level should do something i think? queue the next block or something
     public:
-        Game(Display *d);
+        Game();
         void spawnBlock();
         void moveLeft();
         void moveRight();
