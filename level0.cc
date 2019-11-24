@@ -8,7 +8,7 @@ Level0::Level0(std::string file, bool useRandom):
 
 Level0::~Level0() {}
 
-
+// lol
 std::unique_ptr<Block> Level0::spawnBlock() {
     return std::make_unique<BlockO>();
 }
