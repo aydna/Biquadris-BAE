@@ -17,7 +17,7 @@ class Game {
     Game();
     int getPlayer(); //gets curr player's turn
     bool gameOver();
-    Board* getBoard(int player); 
+    Board* getBoard(int player);
     void levelUp(int lvl);
     void drop();
     void rotateCW(int mult);
