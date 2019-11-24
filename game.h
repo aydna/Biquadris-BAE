@@ -19,6 +19,7 @@ class Game {
     bool gameOver();
     Board* getBoard(int player);
     void levelUp(int lvl);
+    void levelDown(int lvl);
     void drop();
     void rotateCW(int mult);
     void rotateCCW(int mult);
