@@ -2,21 +2,24 @@
 #include <utility>
 #include "block.h"
 
+Block::Block(std::vector<std::pair<int,int>> pixels, char color, int levelSpawned, int weight): 
+    pixels{pixels}, 
+    color{color},
+    levelSpawned{levelSpawned},
+    weight{weight}{}
 
-Block::Block(std::vector<std::pair<int,int>> pixels): pixels{pixels}{}
+std::vector<std::pair<int,int>> Block::getPixels(){
+    return pixels;
+}
 
-void Block::moveRight(){
-    for (auto &p : pixels){
-        ++p.second;
-    }
+void Block::setPixels(std::vector<std::pair<int,int>> newPixels){
+    pixels = newPixels;
 }
-void Block::moveLeft(){
-    for (auto &p : pixels){
-        --p.second;
-    }
+
+char Block::getColor(){
+    return color;
 }
-void Block::drop(int distance){
-    for (auto &p : pixels){
-        p.first += distance;
-    }
+
+int Block::getLevelSpawned(){
+    return levelSpawned;
 }

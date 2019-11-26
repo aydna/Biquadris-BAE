@@ -4,12 +4,17 @@
 #include <utility>
 
 class Block{
+    std::vector<std::pair<int,int>> pixels;
+    char color;
+    int levelSpawned;
+    int weight;
+
     public:
-        std::vector<std::pair<int,int>> pixels; // move this to private and make an accessor 
-        Block(std::vector<std::pair<int,int>> pixels);
-        void moveRight();
-        void moveLeft();
-        void drop(int distance);
+        Block(std::vector<std::pair<int,int>> pixels, char color, int levelSpawned, int weight);
+        std::vector<std::pair<int,int>> getPixels();
+        void setPixels(std::vector<std::pair<int,int>> newPixels);
+        char getColor();
+        int getLevelSpawned();
 };
 
 #endif

@@ -7,8 +7,8 @@
 #include <sstream>
 
 #include "controller.h"
-// #include "game.h"
-// #include "display.h"
+#include "game.h"
+#include "display.h"
 
 //helper so we can push the command names from a file for sanity
 std::vector<std::string> push_commandNames(std::vector<std::string> list) {
@@ -22,14 +22,16 @@ std::vector<std::string> push_commandNames(std::vector<std::string> list) {
 }
 
 //constrcutor (doesn't do a whole lot)
-Controller::Controller() :
-        game{std::unique_ptr<Game>{}}, 
-        display{std::unique_ptr<Display>{}}, 
+Controller::Controller(bool textOnly, int seed, std::string scriptfile1, std::string scriptfile2, int startLevel):
+        game{std::make_unique<Game>(seed, scriptfile1, scriptfile2, startLevel)}, 
+        display{std::make_unique<Display>(game.get())}, 
         currentMultiplicity{1}, 
         currentCommand{""}, 
         currentCommandArg{""},
         commandList{std::vector<std::string>{}} {
+
     commandList = push_commandNames(this->commandList);
+    display->updateDisplay();
 }
 
 //destructor
@@ -39,7 +41,7 @@ Controller::~Controller() {}
 bool Controller::run(std::string line) {
     if (readCommand(line)) {
         executeCommand();
-        display->update();
+        display->updateDisplay();
     }
     return !(game->gameOver());
 }
@@ -47,9 +49,12 @@ bool Controller::run(std::string line) {
 
 bool Controller::readCommand(std::string line) {
     std::stringstream pants{line};
-    currentMultiplicity = 1;
+    
     pants >> currentMultiplicity;
-    if (pants.fail()) pants.clear();
+    if (pants.fail()) {
+        pants.clear();
+        currentMultiplicity = 1;
+    }
 
     std::string com;
     pants >> com;
@@ -69,9 +74,10 @@ bool Controller::readCommand(std::string line) {
 
 void Controller::executeCommand() { //need multiplicity functionality
     if (currentCommand == "left") {
-        game->moveLeft(-1 * currentMultiplicity);
+        game->moveLeft(currentMultiplicity);
     } else if (currentCommand == "right") {
         game->moveRight(currentMultiplicity);
+        //std::cout << currentMultiplicity << std::endl;
 
     } else if (currentCommand == "down") {
         game->moveDown(currentMultiplicity);
@@ -83,13 +89,15 @@ void Controller::executeCommand() { //need multiplicity functionality
         game->rotateCCW(currentMultiplicity);
 
     } else if (currentCommand == "drop") {
-        game->drop(currentMultiplicity);
+        // add mult piclid y 
+        game->drop();
+        //game->drop(currentMultiplicity);
 
     } else if (currentCommand == "levelup") {
-        game->levelup(currentMultiplicity);
+        game->levelUp(currentMultiplicity);
 
     } else if (currentCommand == "leveldown") {
-        game->leveldown(currentMultiplicity);
+        game->levelDown(currentMultiplicity);
 
     } else if (currentCommand == "norandom") {
         // not sure
@@ -116,6 +124,12 @@ void Controller::executeCommand() { //need multiplicity functionality
     } else if (currentCommand == "T") {
 
     } else if (currentCommand == "restart") {
-        game->restart();
+        //game->restart();
     }
+}
+
+
+std::ostream &operator <<(std::ostream &out, const Controller &c){
+    out << *c.display;
+    return out;
 }
