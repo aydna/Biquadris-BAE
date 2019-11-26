@@ -34,8 +34,8 @@ void Display::updateDisplay() {
     // clear board (for now)
     for (int row = 0; row < p1.boardSize.first; ++row){
         for (int col = 0; col < p1.boardSize.second; ++col){
-            p1.grid[row][col] = ' ';
-            p2.grid[row][col] = ' ';
+            p1.grid[row][col] = '.';
+            p2.grid[row][col] = '.';
         }
     }
 

@@ -1,7 +1,7 @@
 #include "level.h"
 
-Level::Level(std::string file, bool useRandom):
-    sequenceFile{file}, useRandom{useRandom} {}
+Level::Level(int seed, std::string file, bool useRandom):
+    seed{seed}, sequenceFile{file}, useRandom{useRandom} {}
 
 
 Level::~Level(){}

@@ -14,7 +14,8 @@ class Game {
     std::unique_ptr<Board> b2;
     public:
     // Ctor v1.0 (accomodates for multiple players (2 for phase0))
-    Game();
+
+    Game(int seed, std::string scriptfile1, std::string scriptfile2, int startLevel);
     int getPlayer(); //gets curr player's turn
     bool gameOver();
     std::unique_ptr<Board>& getBoard(int player);

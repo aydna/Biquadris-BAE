@@ -22,8 +22,8 @@ std::vector<std::string> push_commandNames(std::vector<std::string> list) {
 }
 
 //constrcutor (doesn't do a whole lot)
-Controller::Controller() :
-        game{std::make_unique<Game>()}, 
+Controller::Controller(bool textOnly, int seed, std::string scriptfile1, std::string scriptfile2, int startLevel):
+        game{std::make_unique<Game>(seed, scriptfile1, scriptfile2, startLevel)}, 
         display{std::make_unique<Display>(game.get())}, 
         currentMultiplicity{1}, 
         currentCommand{""}, 
@@ -95,7 +95,7 @@ void Controller::executeCommand() { //need multiplicity functionality
         game->levelUp(currentMultiplicity);
 
     } else if (currentCommand == "leveldown") {
-        //game->levelDown(currentMultiplicity);
+        game->levelDown(currentMultiplicity);
 
     } else if (currentCommand == "norandom") {
         // not sure

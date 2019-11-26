@@ -5,8 +5,11 @@
 #include "board.h"
 
 
-Game::Game() :
-    boardSize{std::pair<int,int>(18,11)}, playerTurn{1}, b1{std::make_unique<Board>(1)}, b2{std::make_unique<Board>(2)} {
+Game::Game(int seed, std::string scriptfile1, std::string scriptfile2, int startLevel) :
+    boardSize{std::pair<int,int>(18,11)}, 
+    playerTurn{1}, 
+    b1{std::make_unique<Board>(seed, scriptfile1, startLevel)}, 
+    b2{std::make_unique<Board>(seed, scriptfile2, startLevel)} {
         b1->spawnBlock();
     }
 
@@ -33,19 +36,19 @@ std::unique_ptr<Board>& Game::getBoard(int player) {
 
 void Game::levelUp(int lvl) {
     if (playerTurn == 1) {
-        //b1->levelUp(lvl);
+        b1->levelUp(lvl);
     }
     else {
-        //b2->levelUp(lvl);
+        b2->levelUp(lvl);
     }
 }
 
 void Game::levelDown(int lvl) {
     if (playerTurn == 1) {
-        //b1->levelDown(lvl);
+        b1->levelDown(lvl);
     }
     else {
-        //b2->levelDown(lvl);
+        b2->levelDown(lvl);
     }
 }
 

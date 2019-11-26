@@ -4,7 +4,7 @@
 
 class BlockT: public Block{
     public:
-        BlockT();
+        BlockT(int levelSpawned, int weight);
 };
 
 #endif

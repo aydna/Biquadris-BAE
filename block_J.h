@@ -4,7 +4,7 @@
 
 class BlockJ: public Block{
     public:
-        BlockJ();
+        BlockJ(int levelSpawned, int weight);
 };
 
 #endif

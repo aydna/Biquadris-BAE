@@ -20,7 +20,7 @@ class Controller final{
     std::vector<std::string> commandList;
 
   public:
-    Controller(); 
+    Controller(bool textOnly, int seed, std::string scriptfile1, std::string scriptfile2, int startLevel); 
     ~Controller();
 
     bool run(std::string line);

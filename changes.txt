@@ -1,0 +1,6 @@
+added levelup/down works for level0/1
+added removed rows
+added scoring (display needs to reflect it)
+added gameover
+added command line arg
+changed all constructors to accomodate this

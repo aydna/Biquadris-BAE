@@ -6,11 +6,15 @@
 class Block{
     std::vector<std::pair<int,int>> pixels;
     char color;
+    int levelSpawned;
+    int weight;
+
     public:
-        Block(std::vector<std::pair<int,int>> pixels, char color);
+        Block(std::vector<std::pair<int,int>> pixels, char color, int levelSpawned, int weight);
         std::vector<std::pair<int,int>> getPixels();
         void setPixels(std::vector<std::pair<int,int>> newPixels);
         char getColor();
+        int getLevelSpawned();
 };
 
 #endif
