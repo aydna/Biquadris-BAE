@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string> 
 #include <sstream>
+#include <fstream>
 #include "controller.h"
 
 using namespace std;
@@ -13,9 +14,11 @@ int main(int argc, char* argv[]) {
     string scriptfile1 = "sequence1.txt";
     string scriptfile2 = "sequence2.txt";
     int startLevel = 0;
-    
+
+    bool storeRun = false;
+    string storeFile;
+
     string arg;
-    
     for (int i = 1; i < argc; ++i){
         istringstream sock{argv[i]};
         sock >> arg;
@@ -30,15 +33,39 @@ int main(int argc, char* argv[]) {
             istringstream sock{argv[++i]};
             sock >> startLevel;
         }
+        else if(arg == "-storerun"){ //stores the run
+            istringstream sock{argv[++i]};
+            sock >> arg;
+            storeFile = arg;
+            storeRun = true; 
+        }
     }
     
+    fstream fs;
+    if (storeRun){
+        fs.open("tests/" + storeFile + ".args", fstream::out);
+        for (int i = 1; i < argc; ++i){
+            istringstream sock{argv[i]};
+            sock >> arg;
+            if (arg != "-storerun"){
+                fs << arg << " ";
+            }
+            else ++i;
+        }
+        fs.close();
+        fs.open("tests/" + storeFile + ".in", fstream::out);
+    }
+
+
     Controller controller{textOnly, seed, scriptfile1, scriptfile2, startLevel};
     string line;
     bool gamePersists = true;
     cout << controller << endl;
+
     while (gamePersists && getline(cin, line)) {
         gamePersists = controller.run(line);
         cout << controller << endl;
+        if (storeRun) fs << line << endl ;
     }
     
 }

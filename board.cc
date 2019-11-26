@@ -7,7 +7,7 @@
 #include "level.h"
 #include "level0.h"
 #include "level1.h"
-#include "display.h"
+#include "drawer.h"
 #include "board.h"
 
 #include <iostream>
@@ -72,7 +72,7 @@ void Board::removeRow(){
             ++rowsCleared;
         }
     }
-    score += (rowsCleared + level) * (rowsCleared + level);
+    if (rowsCleared > 0) score += (rowsCleared + level) * (rowsCleared + level);
 }
 
 void Board::spawnBlock(){

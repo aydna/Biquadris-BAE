@@ -8,7 +8,9 @@
 
 #include "controller.h"
 #include "game.h"
-#include "display.h"
+#include "drawer.h"
+#include "text_drawer.h"
+#include "graphics_drawer.h"
 
 //helper so we can push the command names from a file for sanity
 std::vector<std::string> push_commandNames(std::vector<std::string> list) {
@@ -24,13 +26,14 @@ std::vector<std::string> push_commandNames(std::vector<std::string> list) {
 //constrcutor (doesn't do a whole lot)
 Controller::Controller(bool textOnly, int seed, std::string scriptfile1, std::string scriptfile2, int startLevel):
         game{std::make_unique<Game>(seed, scriptfile1, scriptfile2, startLevel)}, 
-        display{std::make_unique<Display>(game.get())}, 
         currentMultiplicity{1}, 
         currentCommand{""}, 
         currentCommandArg{""},
         commandList{std::vector<std::string>{}} {
     commandList = push_commandNames(this->commandList);
-    display->updateDisplay();
+    displays.emplace_back(std::make_unique<TextDrawer>(game.get()));
+    if (!textOnly) displays.emplace_back(std::make_unique<GraphicsDrawer>(game.get()));
+    for(auto &d : displays) d->updateDisplay();
 }
 
 //destructor
@@ -40,7 +43,7 @@ Controller::~Controller() {}
 bool Controller::run(std::string line) {
     if (readCommand(line)) {
         executeCommand();
-        display->updateDisplay();
+        for(auto &d : displays) d->updateDisplay();
     }
     return !(game->gameOver());
 }
@@ -128,6 +131,6 @@ void Controller::executeCommand() { //need multiplicity functionality
 
 
 std::ostream &operator <<(std::ostream &out, const Controller &c){
-    out << *c.display;
+    for (auto &d : c.displays) d->print(out);
     return out;
 }

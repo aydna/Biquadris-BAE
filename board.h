@@ -6,7 +6,7 @@
 #include <string>
 #include "block.h"
 #include "level.h"
-#include "display.h"
+#include "drawer.h"
 
 class Board{
     int level;

@@ -1,4 +1,4 @@
-#include "display.h"
+#include "drawer.h"
 #include "board.h"
 #include "game.h"
 #include <vector>
@@ -6,8 +6,17 @@
 #include <memory>
 #include <iostream>
 
+/*
+ANDY READ ME
 
-Display::Display(Game* game):my_game{game}{
+youre gonna make this faster for the graphics display,
+store the "old" grid everytime you update the grid.
+This old grid is gonna be used by the graphics to see what actually needs
+to be redrawn
+
+should be pretty easy to make <3 thanks
+*/
+Drawer::Drawer(Game* game):my_game{game}{
     
     p1.boardSize = std::pair<int,int>(18,11);
     p2.boardSize = std::pair<int,int>(18,11);
@@ -26,11 +35,13 @@ Display::Display(Game* game):my_game{game}{
         p1.grid.emplace_back(newRow);
     }
     //for now
-    p2.grid = p1.grid;
+    p2.oldGrid = p1.oldGrid = p2.grid = p1.grid;
 }
 
-void Display::updateDisplay() {
-
+void Drawer::updateDisplay() {
+    //dont remove
+    p1.oldGrid = p1.grid;
+    p2.oldGrid = p2.grid;
     // clear board (for now)
     for (int row = 0; row < p1.boardSize.first; ++row){
         for (int col = 0; col < p1.boardSize.second; ++col){
@@ -49,6 +60,8 @@ void Display::updateDisplay() {
             p1.grid[p.first][p.second] = curr_color;
         }
     }
+    p1.score = b1->getScore();
+    p1.level = b1->getLevel();
 
 
     //for p2 board
@@ -61,31 +74,7 @@ void Display::updateDisplay() {
             p2.grid[p.first][p.second] = curr_color;
         }
     }
+    p2.score = b2->getScore();
+    p2.level = b2->getLevel();
     
-}
-
-
-std::ostream &operator <<(std::ostream &out, const Display &d) {
-    out << std::endl << std::endl;
-    out << " Level:    " << d.p1.level << "      "; // 6 spaces between the boards
-    out << "Level:    " << d.p2.level << std::endl;
-    out << " Score:    " << d.p1.level << "      ";
-    out << "Score:    " << d.p2.level << std::endl;
-    out << " -----------      -----------" << std::endl;
-
-    for (int row = 0; row < d.p1.boardSize.first; row++) {
-        out << "|";
-        for (int col = 0; col < d.p1.boardSize.second; col++) {
-            out << d.p1.grid[row][col];
-        }
-        out << "|    |";
-        for (int col = 0; col < d.p2.boardSize.second; col++) {
-            out << d.p2.grid[row][col];
-        }
-        out << "|";
-        out << std::endl;
-    }
-    out << " -----------      -----------";
-    //out << "Next:" for later impl
-    return out;
 }

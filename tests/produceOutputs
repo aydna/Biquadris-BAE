@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ $# -ne 2 ]; then
+	>&2 echo "Wrong number ($#) of args given to ~produceOutputs~"
+	exit 1
+fi
+for file in $(cat $1); do
+	echo ${file}
+	if [ -r "${file}.in" ] && [ -r "${file}.args" ]; then
+		$2 $(cat ${file}.args) < ${file}.in > ${file}.out
+	elif [ -r "${file}.in" ]; then
+		$2 < ${file}.in > ${file}.out
+	elif [ -r "${file}.args" ]; then
+		$2 $(cat ${file}.args) > ${file}.out
+	else
+		$2 > ${file}.out
+	fi
+done
