@@ -27,6 +27,7 @@ class Game {
     void moveRight(int mult);
     void moveLeft(int mult);
     void moveDown(int mult);
+    void swapBlock(std::string type);
     void makeSpecial(std::string type, int mult); //special effects
     void giveLevelBlockSeq(std::string fname);
     void removeLevelBlockSeq(std::string fname);

@@ -25,6 +25,7 @@ class Board{
     public:
         Board(int seed, std::string scriptfile, int startLevel);
         void spawnBlock();
+        void swapBlock(std::string type);
         void levelUp(int times);
         void levelDown(int times);
         void moveRight(int times);

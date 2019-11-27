@@ -13,7 +13,8 @@ class Level1: public Level{
         Level1(int seed, std::string file, bool useRandom = true);
         ~Level1();
 
-        virtual std::unique_ptr<Block> spawnBlock() override;
+        std::unique_ptr<Block> spawnBlock() override;
+        std::unique_ptr<Block> spawnBlock(std::string type) override;
 };
 
 

@@ -80,6 +80,12 @@ void Board::spawnBlock(){
     checkGameOver(blocks.back()->getPixels());
 }
 
+void Board::swapBlock(std::string type){
+    blocks.pop_back();
+    blocks.emplace_back(currLevel->spawnBlock(type));
+    checkGameOver(blocks.back()->getPixels());
+}
+
 void Board::levelUp(int times){
     level += times; 
     if (level > 4) level = 4;
@@ -175,7 +181,6 @@ void Board::rotateCW(int times){
 void Board::rotateCCW(int times){
     rotateCW((times % 4)* 3);       //works <3
 }
-
 
 void Board::drop(){
     moveDown(18); 

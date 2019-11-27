@@ -13,6 +13,7 @@ class Level{
     public:
         Level(int seed, std::string file, bool useRandom);
         virtual std::unique_ptr<Block> spawnBlock()=0;
+        virtual std::unique_ptr<Block> spawnBlock(std::string type)=0;
         virtual ~Level()=0;
 };
 
