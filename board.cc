@@ -7,6 +7,9 @@
 #include "level.h"
 #include "level0.h"
 #include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 #include "display.h"
 #include "board.h"
 
@@ -18,6 +21,9 @@ Board::Board(int seed, std::string scriptfile, int startLevel):
     file{scriptfile}{
         if (level == 0) currLevel = std::make_unique<Level0>(seed, file);
         else if (level == 1) currLevel = std::make_unique<Level1>(seed, file);
+        // else if (level == 2) currLevel = std::make_unique<Level2>(seed, file);
+        // else if (level == 3) currLevel = std::make_unique<Level3>(seed, file);
+        // else if (level == 4) currLevel = std::make_unique<Level4>(seed, file);
     } 
 
 
@@ -85,6 +91,9 @@ void Board::levelUp(int times){
     if (level > 4) level = 4;
     if (level == 0) currLevel = std::make_unique<Level0>(seed, file);
     else if (level == 1) currLevel = std::make_unique<Level1>(seed, file);
+    // else if (level == 2) currLevel = std::make_unique<Level2>(seed, file);
+    // else if (level == 3) currLevel = std::make_unique<Level3>(seed, file);
+    // else if (level == 4) currLevel = std::make_unique<Level4>(seed, file);
 }
 
 void Board::levelDown(int times){
@@ -92,6 +101,9 @@ void Board::levelDown(int times){
     if (level < 0) level = 0;
     if (level == 0) currLevel = std::make_unique<Level0>(seed, file);
     else if (level == 1) currLevel = std::make_unique<Level1>(seed, file);
+    // else if (level == 2) currLevel = std::make_unique<Level2>(seed, file);
+    // else if (level == 3) currLevel = std::make_unique<Level3>(seed, file);
+    // else if (level == 4) currLevel = std::make_unique<Level4>(seed, file);
 }
 
 

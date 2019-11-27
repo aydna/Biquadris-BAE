@@ -1,15 +1,15 @@
-#ifndef LEVEL1_H
-#define LEVEL1_H
+#ifndef LEVEL2_H
+#define LEVEL2_H
 
 #include <string>
 #include "level.h"
 
 class Block; //might give multiple declaration error
 
-class Level1: public Level{
+class Level2: public Level{
     public:
-        Level1(int seed = 0, std::string file = "", bool useRandom = true);
-        ~Level1();
+        Level2(int seed = 0, std::string file = "", bool useRandom = true);
+        ~Level2();
 
         virtual std::string spawnRandom() override;
 };

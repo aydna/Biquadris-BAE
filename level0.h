@@ -3,7 +3,6 @@
 #define LEVEL0_H
 
 #include <string>
-#include <memory>
 #include "level.h"
 
 class Block; //might give multiple declaration error
@@ -13,7 +12,7 @@ class Level0: public Level{
         Level0(int seed = 0, std::string file = "sequence1.txt", bool useRandom = false);
         ~Level0();
 
-        virtual std::unique_ptr<Block> spawnBlock() override;
+        virtual std::string spawnRandom() override;
 };
 
 

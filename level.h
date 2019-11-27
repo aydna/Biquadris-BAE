@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 //forward declarations
 class Block;
@@ -11,16 +12,23 @@ class Block;
 class Level{
     protected:
         int seed;
-        std::string sequenceFile;
+        std::string sequenceFileName;
         bool useRandom;
+        std::vector<std::string> blockList;
+        int blockListIndex;
     
     public:
-        Level(int seed, std::string file, bool useRandom);
+        Level(int seed, std::string filename, bool useRandom);
         virtual ~Level()=0;
 
-        virtual std::unique_ptr<Block> spawnBlock() = 0;
-        virtual void giveLevelBlockSeq(std::string filename) = 0;
-        virtual void removeLevelBlockSeq() = 0;
+        std::unique_ptr<Block> spawnBlock();
+        void giveLevelBlockSeq(std::string filename);
+        void removeLevelBlockSeq();
+
+    private:
+        virtual std::string spawnRandom() = 0;
+    protected:
+        std::string spawnNorandom();
         
 };
 

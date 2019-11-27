@@ -1,34 +1,34 @@
-#include "level1.h"
+#include "level2.h"
 #include <string>
 #include <cstdlib>
 
 
 
-Level1::Level1(int seed, std::string file, bool useRandom): 
+Level2::Level2(int seed, std::string file, bool useRandom): 
         Level{seed, file, useRandom} {}
 
-Level1::~Level1() {}
+Level2::~Level2() {}
 
 
 
-std::string Level1::spawnRandom() {
-    int gen = rand() % 12;
+std::string Level2::spawnRandom() {
+    int gen = rand() % 7;
     if (gen < 1) {
         return "S";
 
     } else if (gen < 2) {
         return "Z";
 
-    } else if (gen < 4) {
+    } else if (gen < 3) {
         return "I";
 
-    } else if (gen < 6) {
+    } else if (gen < 4) {
         return "J";
 
-    } else if (gen < 8) {
+    } else if (gen < 5) {
         return "L";
 
-    } else if (gen < 10) {
+    } else if (gen < 6) {
         return "O";
 
     } else {
