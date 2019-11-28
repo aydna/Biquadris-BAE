@@ -18,6 +18,7 @@ Board::Board(int seed, std::string scriptfile, int startLevel):
     file{scriptfile}{
         if (level == 0) currLevel = std::make_unique<Level0>(seed, file);
         else if (level == 1) currLevel = std::make_unique<Level1>(seed, file);
+        nextBlock = std::move(currLevel->spawnBlock());
     } 
 
 
@@ -76,7 +77,8 @@ void Board::removeRow(){
 }
 
 void Board::spawnBlock(){
-    blocks.emplace_back(currLevel->spawnBlock());
+    blocks.emplace_back(std::move(nextBlock));
+    nextBlock = currLevel->spawnBlock();
     checkGameOver(blocks.back()->getPixels());
 }
 
@@ -91,6 +93,7 @@ void Board::levelUp(int times){
     if (level > 4) level = 4;
     if (level == 0) currLevel = std::make_unique<Level0>(seed, file);
     else if (level == 1) currLevel = std::make_unique<Level1>(seed, file);
+    nextBlock = std::move(currLevel->spawnBlock());
 }
 
 void Board::levelDown(int times){
@@ -98,6 +101,7 @@ void Board::levelDown(int times){
     if (level < 0) level = 0;
     if (level == 0) currLevel = std::make_unique<Level0>(seed, file);
     else if (level == 1) currLevel = std::make_unique<Level1>(seed, file);
+    nextBlock = std::move(currLevel->spawnBlock());
 }
 
 
@@ -110,6 +114,7 @@ void Board::moveRight(int times){
         for (auto &p : pixels) ++p.second;          //actually moves pixles 1 to the right
     }
     blocks.back()->setPixels(pixels);
+    moveDown(blocks.back()->getWeight());
 }
 
 void Board::moveLeft(int times){
@@ -121,6 +126,7 @@ void Board::moveLeft(int times){
         for (auto &p : pixels) --p.second;          //actually moves pixles 1 to the left
     }
     blocks.back()->setPixels(pixels);
+    moveDown(blocks.back()->getWeight());
 }
 
 void Board::moveDown(int times){
@@ -175,11 +181,13 @@ void Board::rotateCW(int times){
         }
     }
     blocks.back()->setPixels(pixels);
+    moveDown(blocks.back()->getWeight());
 }
 
 
 void Board::rotateCCW(int times){
     rotateCW((times % 4)* 3);       //works <3
+    moveDown(blocks.back()->getWeight() - 1); //because
 }
 
 void Board::drop(){
@@ -192,6 +200,8 @@ int Board::getLevel(){ return level; }
 int Board::getScore(){ return score; }
 
 std::vector<std::unique_ptr<Block>> &Board::getBlocks(){ return blocks; }
+
+std::unique_ptr<Block> &Board::getNextBlock(){ return nextBlock; }
 
 void Board::checkGameOver(std::vector<std::pair<int,int>> pixels){
     std::vector<std::pair<int,int>> boardPixels = getBoardPixels(1);

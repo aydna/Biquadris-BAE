@@ -15,6 +15,7 @@ class GraphicsDrawer: public Drawer {
     void drawBoxes(int bs);
     void drawHeaders(int bs);
     void drawBlocks(int bs);
+    void drawNextBlock(int bs);
 
     public:
     GraphicsDrawer(Game* game);

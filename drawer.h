@@ -12,6 +12,7 @@ struct Player {
     std::pair<int,int> boardSize;
     std::vector<std::vector<char>> oldGrid;
     std::vector<std::vector<char>> grid;
+    std::vector<std::vector<char>> nextBlock;
     int score;
     int level;
 };

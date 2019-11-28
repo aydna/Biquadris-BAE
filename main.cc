@@ -56,7 +56,6 @@ int main(int argc, char* argv[]) {
         fs.open("tests/" + storeFile + ".in", fstream::out);
     }
 
-
     Controller controller{textOnly, seed, scriptfile1, scriptfile2, startLevel};
     string line;
     bool gamePersists = true;
