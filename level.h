@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <fstream>
 
 //forward declarations
 class Block;
@@ -14,14 +15,17 @@ class Level{
         int seed;
         std::string sequenceFileName;
         bool useRandom;
-        std::vector<std::string> blockList;
-        int blockListIndex;
         int levelNum;
         int levelWeight;
-    
+
+        std::ifstream fileStream;
+
+        //std::vector<std::string> blockList;
+        //int blockListIndex;
+
     public:
         Level(int seed, std::string file, bool useRandom, int levelNum, int levelWeight);
-        //virtual std::unique_ptr<Block> spawnBlock()=0;
+        
         virtual std::unique_ptr<Block> spawnBlock(std::string inBlock = "");
         virtual ~Level()=0;
 
@@ -30,9 +34,6 @@ class Level{
 
     private:
         virtual std::string spawnRandom() = 0;
-    protected:
-        std::string spawnNorandom();
-        
 };
 
 

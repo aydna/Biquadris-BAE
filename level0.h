@@ -9,7 +9,7 @@ class Block; //might give multiple declaration error
 
 class Level0: public Level{
     public:
-        Level0(int seed = 0, std::string file = "sequence1.txt", bool useRandom = false);
+        Level0(int seed, std::string file, bool useRandom = false);
         ~Level0();
 
         std::string spawnRandom() override;
