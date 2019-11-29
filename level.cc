@@ -79,5 +79,6 @@ std::string Level::spawnNorandom() {
     if (blockListIndex >= len) {
         blockListIndex = 0;
     }
+    ++blockListIndex;
     return blockList.at(blockListIndex);
 }
