@@ -15,3 +15,6 @@ added restart game
 added nextBlock in board.cc, display.cc, graphics.cc
 added a few special "black" blocks for higher levels
 added the ablity for blocks to be heavy
+
+kinda fixed level0
+added comments to board.cc

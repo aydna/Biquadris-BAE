@@ -8,16 +8,17 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
-    //arg handling here
+    // <ARG HANDLING>
     bool textOnly = false;
     int seed = 0;
     string scriptfile1 = "sequence1.txt";
     string scriptfile2 = "sequence2.txt";
     int startLevel = 0;
-
+    //these two are for storing a run in txt files
     bool storeRun = false;
     string storeFile;
 
+    //checking which flags were given and setting those vars
     string arg;
     for (int i = 1; i < argc; ++i){
         istringstream sock{argv[i]};
@@ -40,7 +41,9 @@ int main(int argc, char* argv[]) {
             storeRun = true; 
         }
     }
-    
+    // </ARG HANDLING>
+
+    //stores the run if -storerun was given
     fstream fs;
     if (storeRun){
         fs.open("tests/" + storeFile + ".args", fstream::out);
@@ -55,16 +58,18 @@ int main(int argc, char* argv[]) {
         fs.close();
         fs.open("tests/" + storeFile + ".in", fstream::out);
     }
-
+    
+    //initizing our controller
     Controller controller{textOnly, seed, scriptfile1, scriptfile2, startLevel};
     string line;
     bool gamePersists = true;
     cout << controller << endl;
 
+    //main loop
     while (gamePersists && getline(cin, line)) {
         gamePersists = controller.run(line);
         cout << controller << endl;
-        if (storeRun) fs << line << endl ;
+        if (storeRun) fs << line << endl ; // stores input
     }
     
 }

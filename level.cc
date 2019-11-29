@@ -10,6 +10,10 @@
 #include "block_L.h"
 #include "block_I.h"
 
+//FOR ETHEN
+// I tried fixing the segfault we were getting before
+// so i just replaced the vector of strings and the index with a filestream 
+// I added notes
 
 //ctor
 Level::Level(int seed, std::string file, bool useRandom, int levelNum, int levelWeight):
@@ -18,7 +22,7 @@ Level::Level(int seed, std::string file, bool useRandom, int levelNum, int level
     useRandom{useRandom},
     levelNum{levelNum}, 
     levelWeight{levelWeight},
-    fileStream{std::ifstream{sequenceFileName}} {
+    fileStream{std::ifstream{sequenceFileName}} { //inits file streame to the file given
         srand(seed);
     }
 
@@ -28,7 +32,7 @@ Level::~Level(){}
 void Level::giveLevelBlockSeq(std::string filename) {
     useRandom = false;
     sequenceFileName = filename;
-    fileStream = std::ifstream{sequenceFileName};
+    fileStream = std::ifstream{sequenceFileName};  //reinits filesteam
 }
 
 void Level::removeLevelBlockSeq() {
@@ -39,11 +43,10 @@ void Level::removeLevelBlockSeq() {
 std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
     std::string type;
     if (!useRandom){
-        if (!(fileStream >> type)){
-            fileStream = std::ifstream{sequenceFileName};
+        if (!(fileStream >> type)){ // if this read failes, this means that EOF
+            fileStream = std::ifstream{sequenceFileName};   //reinit filestream
             fileStream >> type;
         }
-        std::cout << type << std::endl;
     }
     else type = spawnRandom();
 
