@@ -16,9 +16,13 @@ class Level{
         bool useRandom;
         std::vector<std::string> blockList;
         int blockListIndex;
+        int levelNum;
+        int levelWeight;
     
     public:
-        Level(int seed, std::string filename, bool useRandom);
+        Level(int seed, std::string file, bool useRandom, int levelNum, int levelWeight);
+        //virtual std::unique_ptr<Block> spawnBlock()=0;
+        virtual std::unique_ptr<Block> spawnBlock(std::string inBlock = "");
         virtual ~Level()=0;
 
         std::unique_ptr<Block> spawnBlock();

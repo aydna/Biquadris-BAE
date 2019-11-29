@@ -15,6 +15,7 @@ class Block{
         void setPixels(std::vector<std::pair<int,int>> newPixels);
         char getColor();
         int getLevelSpawned();
+        int getWeight();
 };
 
 #endif

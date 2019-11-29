@@ -23,3 +23,7 @@ char Block::getColor(){
 int Block::getLevelSpawned(){
     return levelSpawned;
 }
+
+int Block::getWeight(){
+    return weight;
+}

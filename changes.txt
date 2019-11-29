@@ -4,3 +4,14 @@ added scoring (display needs to reflect it)
 added gameover
 added command line arg
 changed all constructors to accomodate this
+
+added tests folder and testing ablity(-storeRun xxx arg) in main
+    note: do not run valigrind with graphics for now (slowest shit ever)
+added slow ass graphics? fix later
+added new commands to makefile (makeclean sclean)
+
+added spawn specific blocks (T J L)
+added restart game
+added nextBlock in board.cc, display.cc, graphics.cc
+added a few special "black" blocks for higher levels
+added the ablity for blocks to be heavy

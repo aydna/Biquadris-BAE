@@ -8,12 +8,18 @@
 
 //forward declarations
 class Game;
-class Display;
+class Drawer;
 
 
 class Controller final{
+    bool textOnly;
+    int seed;
+    std::string scriptfile1;
+    std::string scriptfile2;
+    int startLevel;
+
     std::unique_ptr<Game> game;
-    std::unique_ptr<Display> display;
+    std::vector<std::unique_ptr<Drawer>> displays;
     int currentMultiplicity;    //number of times a command is executed
     std::string currentCommand; //command name, related to that in the list
     std::string currentCommandArg;  //file name for norandom and sequence

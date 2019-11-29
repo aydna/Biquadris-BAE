@@ -12,7 +12,8 @@ class Level0: public Level{
         Level0(int seed = 0, std::string file = "sequence1.txt", bool useRandom = false);
         ~Level0();
 
-        virtual std::string spawnRandom() override;
+        std::string spawnRandom() override;
+        //std::unique_ptr<Block> spawnBlock(std::string type) override;
 };
 
 

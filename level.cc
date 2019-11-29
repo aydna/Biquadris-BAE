@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "level.h"
 #include "block_O.h"
 #include "block_T.h"
@@ -21,8 +22,9 @@ void pushBlockList(std::string sequenceFileName, std::vector<std::string> &block
 }
 
 //ctor
-Level::Level(int seed, std::string file, bool useRandom):
-    seed{seed}, sequenceFileName{file}, useRandom{useRandom}, blockList{std::vector<std::string>{}}, blockListIndex{0} {
+Level::Level(int seed, std::string file, bool useRandom, int levelNum, int levelWeight):
+    seed{seed}, sequenceFileName{file}, useRandom{useRandom}, blockList{std::vector<std::string>{}}, blockListIndex{0},
+    levelNum{levelNum}, levelWeight{levelWeight} {
     if (file != "") {
         pushBlockList(file, blockList);
     }
@@ -43,36 +45,67 @@ void Level::removeLevelBlockSeq() {
 }
 
 
-std::unique_ptr<Block> Level::spawnBlock() {
+std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
     std::string type;
     if (useRandom) {
         type = spawnRandom();
     } else {
         type = spawnNorandom();
     }
-
+    if (inBlock.length() != 0) {
+        type = inBlock;
+    }
+    //block type processing
     if (type == "S") {
-        return std::make_unique<BlockS>(1,0);
+        return std::make_unique<BlockS>(levelNum,levelWeight);
 
     } else if (type == "Z") {
-        return std::make_unique<BlockZ>(1,0);
+        return std::make_unique<BlockZ>(levelNum,levelWeight);
 
     } else if (type == "I") {
-        return std::make_unique<BlockI>(1,0);
+        return std::make_unique<BlockI>(levelNum,levelWeight);
 
     } else if (type == "J") {
-        return std::make_unique<BlockJ>(1,0);
+        return std::make_unique<BlockJ>(levelNum,levelWeight);
 
     } else if (type == "L") {
-        return std::make_unique<BlockL>(1,0);
+        return std::make_unique<BlockL>(levelNum,levelWeight);
 
     } else if (type == "T") {
-        return std::make_unique<BlockT>(1,0);
+        return std::make_unique<BlockT>(levelNum,levelWeight);
 
+    } else if {type == "O") {}
+        return std::make_unique<BlockO>(levelNum,levelWeight);
     } else {
-        return std::make_unique<BlockO>(1,0);
+        std::cerr << "Bad block type was read." << std::endl;
     }
 }
+
+//overloading spawnBlock() with a string input
+/*std::unique_ptr<Block> Level::spawnBlock(std::string type){
+    if (type == "I") {
+        return std::make_unique<BlockI>(0,0);
+
+    } else if (type == "J") {
+        return std::make_unique<BlockJ>(0,0);
+
+    } else if (type == "L") {
+        return std::make_unique<BlockL>(0,0);
+
+    } else if (type == "O") {
+        return std::make_unique<BlockO>(0,0);
+
+    } else if (type == "S") {
+        return std::make_unique<BlockS>(0,0);
+
+    } else if (type == "Z") {
+        return std::make_unique<BlockZ>(0,0);
+
+    } else {
+        return std::make_unique<BlockT>(0,0);
+    }
+}
+*/
 
 std::string Level::spawnNorandom() {
     int len = blockList.size();

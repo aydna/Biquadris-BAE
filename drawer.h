@@ -1,5 +1,5 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef DRAWER_H
+#define DRAWER_H
 #include <vector>
 #include <utility>
 #include <memory>
@@ -10,39 +10,41 @@ class Game;
 
 struct Player {
     std::pair<int,int> boardSize;
+    std::vector<std::vector<char>> oldGrid;
     std::vector<std::vector<char>> grid;
+    std::vector<std::vector<char>> nextBlock;
     int score;
     int level;
 };
 
-class Display {
+class Drawer {
     protected:
     // can exchange this for array of however many players
-    Player p1;
-    Player p2;
+    Player p1; //shoul be Impl!!!
+    Player p2; //shoul be Impl!!!
     Game* my_game;
 
     public:
-    Display(Game* game);
+    Drawer(Game* game);
+    virtual std::ostream& print(std::ostream& out)=0;
     void updateDisplay();
 
-    friend std::ostream &operator <<(std::ostream &out, const Display &d); //a friend
 };
 
 
 
 
 /*
-class Display{
+class Drawer{
     // also figure out the 3 reserve rows problem
     std::pair<int,int> boardSize= std::pair<int,int>(18,10); // (rows, cols)
     std::vector<std::vector<char>> grid1;
     std::vector<std::vector<char>> grid2;
     
     public:
-        Display();
+        Drawer();
         void update(const std::vector<std::unique_ptr<Block>> &blocks1, const std::vector<std::unique_ptr<Block>> &blocks2);
-        friend std::ostream &operator <<(std::ostream &out , const Display &d); //controller should use this to print to stdout
+        friend std::ostream &operator <<(std::ostream &out , const Drawer &d); //controller should use this to print to stdout
 };
 */
 

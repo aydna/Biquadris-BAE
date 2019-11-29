@@ -5,7 +5,7 @@
 
 
 Level2::Level2(int seed, std::string file, bool useRandom): 
-        Level{seed, file, useRandom} {}
+        Level{seed, file, useRandom, 2, 0} {}
 
 Level2::~Level2() {}
 

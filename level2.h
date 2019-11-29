@@ -11,7 +11,7 @@ class Level2: public Level{
         Level2(int seed = 0, std::string file = "", bool useRandom = true);
         ~Level2();
 
-        virtual std::string spawnRandom() override;
+        std::string spawnRandom() override;
 };
 
 
