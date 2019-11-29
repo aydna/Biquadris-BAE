@@ -11,6 +11,6 @@ Level0::~Level0() {}
 
 // lol
 std::string Level0::spawnRandom() {
-    return Level::spawnNorandom();
+    return spawnNorandom();
 }
 

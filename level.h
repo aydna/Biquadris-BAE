@@ -25,7 +25,6 @@ class Level{
         virtual std::unique_ptr<Block> spawnBlock(std::string inBlock = "");
         virtual ~Level()=0;
 
-        std::unique_ptr<Block> spawnBlock();
         void giveLevelBlockSeq(std::string filename);
         void removeLevelBlockSeq();
 

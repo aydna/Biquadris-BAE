@@ -55,6 +55,8 @@ std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
     if (inBlock.length() != 0) {
         type = inBlock;
     }
+    std::cerr << type << std::endl;
+
     //block type processing
     if (type == "S") {
         return std::make_unique<BlockS>(levelNum,levelWeight);
@@ -74,7 +76,7 @@ std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
     } else if (type == "T") {
         return std::make_unique<BlockT>(levelNum,levelWeight);
 
-    } else if {type == "O") {}
+    } else if (type == "O") {
         return std::make_unique<BlockO>(levelNum,levelWeight);
     } else {
         std::cerr << "Bad block type was read." << std::endl;
@@ -112,6 +114,7 @@ std::string Level::spawnNorandom() {
     if (blockListIndex >= len) {
         blockListIndex = 0;
     }
+    std::cerr << blockListIndex << std::endl;
     ++blockListIndex;
     return blockList.at(blockListIndex);
 }
