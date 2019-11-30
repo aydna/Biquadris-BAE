@@ -8,26 +8,21 @@
 
 class Game;
 
-struct Player {
-    std::pair<int,int> boardSize;
-    std::vector<std::vector<char>> oldGrid;
-    std::vector<std::vector<char>> grid;
-    int score;
-    int level;
-};
-
 class Drawer {
     protected:
     // can exchange this for array of however many players
-    Player p1; //shoul be Impl!!!
-    Player p2; //shoul be Impl!!!
+    class playerImpl;
+
+    unique-ptr<playerImpl> p1; //pImpl idiom
+    unique-ptr<playerImpl> p2; 
+    
     Game* my_game;
 
     public:
     Drawer(Game* game);
     virtual std::ostream& print(std::ostream& out)=0;
     void updateDisplay();
-
+    ~Drawer(); // need explicit def
 };
 
 

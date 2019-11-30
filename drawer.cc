@@ -18,24 +18,24 @@ should be pretty easy to make <3 thanks
 */
 Drawer::Drawer(Game* game):my_game{game}{
     
-    p1.boardSize = std::pair<int,int>(18,11);
-    p2.boardSize = std::pair<int,int>(18,11);
+    p1->boardSize = std::pair<int,int>(18,11);
+    p2->boardSize = std::pair<int,int>(18,11);
 
-    p1.score = 0;
-    p2.score = 0;
+    p1->score = 0;
+    p2->score = 0;
 
-    p1.level = 0;
-    p2.level = 0;
+    p1->level = 0;
+    p2->level = 0;
 
-    for (int row = 0; row < p1.boardSize.first; row++) {
+    for (int row = 0; row < p1->boardSize.first; row++) {
         std::vector<char> newRow;
-        for (int col = 0; col < p1.boardSize.second; col++) {
+        for (int col = 0; col < p1->boardSize.second; col++) {
             newRow.emplace_back(' ');
         }
         p1.grid.emplace_back(newRow);
     }
     //for now
-    p2.oldGrid = p1.oldGrid = p2.grid = p1.grid;
+    p2->oldGrid = p1->oldGrid = p2->grid = p1->grid;
 }
 
 void Drawer::updateDisplay() {
