@@ -8,18 +8,8 @@ Block::Block(std::vector<std::pair<int,int>> pixels, char color, int levelSpawne
     levelSpawned{levelSpawned},
     weight{weight}{}
 
-std::vector<std::pair<int,int>> Block::getPixels(){
-    return pixels;
-}
-
-void Block::setPixels(std::vector<std::pair<int,int>> newPixels){
-    pixels = newPixels;
-}
-
-char Block::getColor(){
-    return color;
-}
-
-int Block::getLevelSpawned(){
-    return levelSpawned;
-}
+std::vector<std::pair<int,int>> Block::getPixels(){ return pixels; }
+void Block::setPixels(std::vector<std::pair<int,int>> newPixels){ pixels = newPixels; }
+char Block::getColor(){ return color; }
+int Block::getLevelSpawned(){ return levelSpawned; }
+int Block::getWeight(){ return weight; }

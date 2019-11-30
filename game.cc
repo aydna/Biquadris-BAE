@@ -112,6 +112,16 @@ void Game::moveDown(int mult) {
     }
 }
 
+
+void Game::swapBlock(std::string type){
+    if (playerTurn == 1) {
+        b1->swapBlock(type);
+    }
+    else {
+        b2->swapBlock(type);
+    }
+}
+
 void Game::makeSpecial(std::string type, int mult) {
     if (playerTurn == 1) {
         //b2->makeSpecial(mult); // apply special board to opponent's board

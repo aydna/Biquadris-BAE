@@ -8,6 +8,18 @@
 
 class Game;
 
+<<<<<<< HEAD
+=======
+struct Player {
+    std::pair<int,int> boardSize;
+    std::vector<std::vector<char>> oldGrid;
+    std::vector<std::vector<char>> grid;
+    std::vector<std::vector<char>> nextBlock;
+    int score;
+    int level;
+};
+
+>>>>>>> a9c54db1f7a9ded72ac720c76dbc0c11fd445c03
 class Drawer {
     protected:
     // can exchange this for array of however many players

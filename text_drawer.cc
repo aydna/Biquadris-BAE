@@ -25,7 +25,17 @@ std::ostream& TextDrawer::print(std::ostream& out){
         out << "|";
         out << std::endl;
     }
-    out << " -----------      -----------";
-    //out << "Next:" for later impl
+    out << " -----------      -----------" << std::endl;
+    out << "Next:            Next:" << std::endl;
+    for (int row = 0; row < 4; row++) {
+        for (int col = 0; col < 4; col++) {
+            out << p1.nextBlock[row][col];
+        }
+        out << "            ";
+        for (int col = 0; col < 4; col++) {
+            out << p2.nextBlock[row][col];
+        }
+        out << std::endl;
+    }
     return out;
 }

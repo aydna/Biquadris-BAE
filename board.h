@@ -14,6 +14,7 @@ class Board{
     std::string file;
     int score;
     std::vector<std::unique_ptr<Block>> blocks;
+    std::unique_ptr<Block> nextBlock;
     std::unique_ptr<Level> currLevel;
     bool gameOverSwitch;
 
@@ -25,6 +26,7 @@ class Board{
     public:
         Board(int seed, std::string scriptfile, int startLevel);
         void spawnBlock();
+        void swapBlock(std::string type);
         void levelUp(int times);
         void levelDown(int times);
         void moveRight(int times);
@@ -36,6 +38,7 @@ class Board{
         int getLevel();
         int getScore();
         std::vector<std::unique_ptr<Block>> &getBlocks();
+        std::unique_ptr<Block> &getNextBlock();
         void checkGameOver(std::vector<std::pair<int,int>> pixels);
         bool gameOver();
 };

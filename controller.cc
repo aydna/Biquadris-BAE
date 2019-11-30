@@ -25,11 +25,17 @@ std::vector<std::string> push_commandNames(std::vector<std::string> list) {
 
 //constrcutor (doesn't do a whole lot)
 Controller::Controller(bool textOnly, int seed, std::string scriptfile1, std::string scriptfile2, int startLevel):
+        textOnly{textOnly},
+        seed{seed},
+        scriptfile1{scriptfile1},
+        scriptfile2{scriptfile2},
+        startLevel{startLevel},
         game{std::make_unique<Game>(seed, scriptfile1, scriptfile2, startLevel)}, 
         currentMultiplicity{1}, 
         currentCommand{""}, 
         currentCommandArg{""},
         commandList{std::vector<std::string>{}} {
+
     commandList = push_commandNames(this->commandList);
     displays.emplace_back(std::make_unique<TextDrawer>(game.get()));
     if (!textOnly) displays.emplace_back(std::make_unique<GraphicsDrawer>(game.get()));
@@ -79,8 +85,6 @@ void Controller::executeCommand() { //need multiplicity functionality
         game->moveLeft(currentMultiplicity);
     } else if (currentCommand == "right") {
         game->moveRight(currentMultiplicity);
-        //std::cout << currentMultiplicity << std::endl;
-
     } else if (currentCommand == "down") {
         game->moveDown(currentMultiplicity);
 
@@ -93,6 +97,7 @@ void Controller::executeCommand() { //need multiplicity functionality
     } else if (currentCommand == "drop") {
         // add mult piclid y 
         game->drop();
+        //game->drop(currentMultiplicity);
 
     } else if (currentCommand == "levelup") {
         game->levelUp(currentMultiplicity);
@@ -112,20 +117,26 @@ void Controller::executeCommand() { //need multiplicity functionality
         //     run(line);
         // }
     } else if (currentCommand == "I") {
-        // not sure
-        // game->swapBlock("I");
+        game->swapBlock("I");
     } else if (currentCommand == "J") {
-    
+        game->swapBlock("J");
     } else if (currentCommand == "L") {
-
+        game->swapBlock("L");
     } else if (currentCommand == "O") {
-
+        game->swapBlock("O");
     } else if (currentCommand == "S") {
-
+        game->swapBlock("S");
+    } else if (currentCommand == "Z") {
+        game->swapBlock("Z");
     } else if (currentCommand == "T") {
-
+        game->swapBlock("T");
     } else if (currentCommand == "restart") {
-        //game->restart();
+        displays.clear();
+        game.reset();
+        game = std::make_unique<Game>(seed, scriptfile1, scriptfile2, startLevel);
+        displays.emplace_back(std::make_unique<TextDrawer>(game.get()));
+        if (!textOnly) displays.emplace_back(std::make_unique<GraphicsDrawer>(game.get()));
+        for(auto &d : displays) d->updateDisplay();
     }
 }
 

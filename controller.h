@@ -12,6 +12,12 @@ class Drawer;
 
 
 class Controller final{
+    bool textOnly;
+    int seed;
+    std::string scriptfile1;
+    std::string scriptfile2;
+    int startLevel;
+
     std::unique_ptr<Game> game;
     std::vector<std::unique_ptr<Drawer>> displays;
     int currentMultiplicity;    //number of times a command is executed
