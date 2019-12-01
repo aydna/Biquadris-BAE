@@ -12,7 +12,7 @@ Level4::~Level4() {}
 
 
 std::string Level4::spawnRandom() {
-    int gen = rand() % 3;
+    int gen = rand() % 9;
     if (gen < 2) {
         return "S";
 

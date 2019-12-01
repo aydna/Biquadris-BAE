@@ -96,7 +96,9 @@ void Controller::executeCommand() { //need multiplicity functionality
 
     } else if (currentCommand == "drop") {
         for (int i = 0; i < currentMultiplicity; ++i) {
-            if (game->drop() == true) { //prompt for special action
+            bool clearTwoRows = game->drop();
+            game->clearSpecial();
+            if (clearTwoRows == true) { //prompt for special action
                 std::cout << "Please enter a special action: 'blind', 'heavy', or 'force'" << std::endl;
                 std::string action;
                 std::cin >> action;
