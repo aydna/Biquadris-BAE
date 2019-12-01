@@ -10,6 +10,7 @@
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
+#include "level5.h"
 #include "board.h"
 #include "board_normal.h"
 
@@ -22,6 +23,7 @@ BoardNormal::BoardNormal(int seed, std::string scriptfile, int startLevel):
         else if (level == 2) currLevel = std::make_unique<Level2>(seed, file);
         else if (level == 3) currLevel = std::make_unique<Level3>(seed, file);
         else if (level == 4) currLevel = std::make_unique<Level4>(seed, file);
+        else if (level == 5) currLevel = std::make_unique<Level5>(seed, file);
         nextBlock = std::move(currLevel->spawnBlock()); //loading first block to be played
     } 
 
@@ -103,12 +105,13 @@ void BoardNormal::swapBlock(std::string type, int weight){
 //level up by times
 void BoardNormal::levelUp(int times){
     level += times; 
-    if (level > 4) level = 4;
+    if (level > 5) level = 5;
     if (level == 0) currLevel = std::make_unique<Level0>(seed, file);
     else if (level == 1) currLevel = std::make_unique<Level1>(seed, file);
     else if (level == 2) currLevel = std::make_unique<Level2>(seed, file);
     else if (level == 3) currLevel = std::make_unique<Level3>(seed, file);
     else if (level == 4) currLevel = std::make_unique<Level4>(seed, file);
+    else if (level == 5) currLevel = std::make_unique<Level5>(seed, file);
     nextBlock = std::move(currLevel->spawnBlock());
 }
 
@@ -121,6 +124,7 @@ void BoardNormal::levelDown(int times){
     else if (level == 2) currLevel = std::make_unique<Level2>(seed, file);
     else if (level == 3) currLevel = std::make_unique<Level3>(seed, file);
     else if (level == 4) currLevel = std::make_unique<Level4>(seed, file);
+    else if (level == 5) currLevel = std::make_unique<Level5>(seed, file);
     nextBlock = std::move(currLevel->spawnBlock());
 }
 

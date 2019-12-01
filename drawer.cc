@@ -94,3 +94,5 @@ void Drawer::updateDisplay() {
     p2->score = b2->getScore();
     p2->level = b2->getLevel();
 }
+
+Drawer::~Drawer(){}

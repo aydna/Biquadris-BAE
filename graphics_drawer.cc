@@ -8,7 +8,7 @@
 #include "graphics_drawer.h"
 
 GraphicsDrawer::GraphicsDrawer(Game* game): Drawer::Drawer{game}{
-    colors['#'] = Xwindow::Black;
+    colors['#'] = Xwindow::DarkGreen;
     colors['I'] = Xwindow::Cyan;
     colors['J'] = Xwindow::Blue;
     colors['L'] = Xwindow::Orange;
@@ -17,6 +17,7 @@ GraphicsDrawer::GraphicsDrawer(Game* game): Drawer::Drawer{game}{
     colors['Z'] = Xwindow::Red;
     colors['T'] = Xwindow::Magenta;
     colors['*'] = Xwindow::Brown;
+    colors['?'] = Xwindow::Black;
 
     drawBoxes(30);
 }

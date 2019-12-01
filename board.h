@@ -15,6 +15,7 @@ class Board{
     
     public:
         Board();
+        virtual ~Board()=0;
         virtual void spawnBlock(std::string type = "", int weight = 0)=0;
         virtual void swapBlock(std::string type, int weight = 0)=0;
         virtual void levelUp(int times)=0;

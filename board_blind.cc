@@ -24,8 +24,8 @@ int BoardBlind::getLevel() { return my_board->getLevel(); }
 int BoardBlind::getScore() { return my_board->getScore(); }
 std::vector<BoardPixels> BoardBlind::getBlocks() { 
     std::vector<BoardPixels> bp = my_board->getBlocks();
-    for (int row = 3; row <= 12; ++row){
-        for (int col = 3; col <= 9; ++col){
+    for (int row = 4; row <= 15; ++row){
+        for (int col = 2; col <= 8; ++col){
             bp.emplace_back(BoardPixels{std::pair<int,int>(row,col),'?'});
         }
     }

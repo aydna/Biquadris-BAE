@@ -31,6 +31,7 @@ class Drawer {
     virtual std::ostream& print(std::ostream& out)=0;
     void updateDisplay();
     void makeBlind();
+    virtual ~Drawer()=0;
 };
 
 

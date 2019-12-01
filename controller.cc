@@ -141,6 +141,7 @@ void Controller::executeCommand() { //need multiplicity functionality
         while (sequence >> input) { 
             run(input);
         }
+        
     } else if (currentCommand == "I") {
         game->swapBlock("I");
     } else if (currentCommand == "J") {

@@ -19,6 +19,7 @@ class Block{
         int getLevelSpawned();
         int getWeight();
         void increaseWeight(int inc);
+        virtual ~Block()=0;
 };
 
 #endif
