@@ -9,6 +9,13 @@
 #include "block_J.h"
 #include "block_L.h"
 #include "block_I.h"
+#include "block_branch.h"
+#include "block_diag.h"
+#include "block_dot.h"
+#include "block_doughnut.h"
+#include "block_rand.h"
+#include "block_X.h"
+
 
 //FOR ETHEN
 // I tried fixing the segfault we were getting before
@@ -39,6 +46,12 @@ void Level::removeLevelBlockSeq() {
     useRandom = true;
 }
 
+void Level::addHeaviness(int shift) {
+    levelWeight += shift;
+}
+void Level::removeHeaviness(int shift) {
+    levelWeight -= shift;
+}
 
 std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
     std::string type;
@@ -73,7 +86,28 @@ std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
 
     } else if (type == "O") {
         return std::make_unique<BlockO>(levelNum,levelWeight);
+
+    } else if (type == "branch") {
+        return std::make_unique<BlockBranch>(levelNum, levelWeight);
+
+    } else if (type == "diag") {
+        return std::make_unique<BlockDiag>(levelNum, levelWeight);
+
+    } else if (type == "dot") {
+        return std::make_unique<BlockDot>(levelNum, levelWeight);
+
+    } else if (type == "doughnut") {
+        return std::make_unique<BlockDoughnut>(levelNum, levelWeight);
+
+    // } else if (type == "rand") {
+    //     return std::make_unique<BlockRand>(levelNum, levelWeight);
+
+    } else if (type == "X") {
+        return std::make_unique<BlockX>(levelNum, levelWeight);
+
     } else {
         std::cerr << "Bad block type was read." << std::endl;
+        return std::make_unique<BlockO>(levelNum,levelWeight);
+
     }
 }
