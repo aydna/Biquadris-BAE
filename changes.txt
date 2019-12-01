@@ -18,3 +18,25 @@ added the ablity for blocks to be heavy
 
 kinda fixed level0
 added comments to board.cc
+
+
+
+FRIDAY MIGHT EXTRAVAGANZA:
+- Decorator pattern sucks (can't implement w/out sacrificing u-ptrs) + idk how it would even be beneficial in this case
+- We use methods instead for special boards (easier/more straightfoward)
+- fix I/O issue w/ blind
+- add level and board relation for heavy
+- force tbd
+- pImpl implemented in player structs in display
+- controller updated
+- display updated w/ makeblind method (easier)
+- controller behaviour w/ special toggle DONE-ish
+- game accounts for specials
+
+DONE- ETHAN friday night
+build heavy setter in level
+(ignored) fix heavy- needs to update immedicately
+TODO
+game.drop returns a bool to ctrler - true if we neeed to prompt for special action input
+    fix game->makespecial
+    

@@ -95,9 +95,17 @@ void Controller::executeCommand() { //need multiplicity functionality
         game->rotateCCW(currentMultiplicity);
 
     } else if (currentCommand == "drop") {
-        // add mult piclid y 
-        game->drop();
-        //game->drop(currentMultiplicity);
+        for (int i = 0; i < currentMultiplicity; ++i) {
+            if (game->drop() == true) { //prompt for special action
+                std::cout << "Please enter a special action: 'blind', 'heavy', or 'force'" << std::endl;
+                std::string action;
+                std::cin >> action;
+                if (action == "blind") {
+                    for(auto &d : displays) d->makeBlind();
+                }
+                game->makeSpecial(action);
+            }
+        }
 
     } else if (currentCommand == "levelup") {
         game->levelUp(currentMultiplicity);
@@ -107,13 +115,13 @@ void Controller::executeCommand() { //need multiplicity functionality
 
     } else if (currentCommand == "norandom") {
         // not sure
-        // game->giveLevelBlockSequence(currentCommandArg);
+        game->giveLevelBlockSeq(currentCommandArg);
     } else if (currentCommand == "random") {
-        // game->removeLevelBlockSequence();
+        game->removeLevelBlockSeq();
     } else if (currentCommand == "sequence") {
         // std::ifstream sequence{currentCommandArg.c_str()};
-        // std::string line;
-        // while (getline(sequence, line)) { 
+        // std::string input;
+        // while (sequence >> input) { 
         //     run(line);
         // }
     } else if (currentCommand == "I") {
@@ -142,6 +150,6 @@ void Controller::executeCommand() { //need multiplicity functionality
 
 
 std::ostream &operator <<(std::ostream &out, const Controller &c){
-    for (auto &d : c.displays) d->print(out);
+    for (auto &d : c.displays) d->print(out);    
     return out;
 }

@@ -32,6 +32,9 @@ class Level{
         void giveLevelBlockSeq(std::string filename);
         void removeLevelBlockSeq();
 
+        void addHeaviness(int shift = 2);
+        void removeHeaviness(int shift = 2);
+
     private:
         virtual std::string spawnRandom() = 0;
 };
