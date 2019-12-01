@@ -4,6 +4,7 @@
 #include <utility>
 #include <iostream>
 #include "board.h"
+#include <string>
 
 
 class Game {
@@ -28,7 +29,8 @@ class Game {
     void moveLeft(int mult);
     void moveDown(int mult);
     void swapBlock(std::string type);
-    void makeSpecial(std::string type, int mult); //special effects
+    void makeSpecial(std::string type); //special effects
+    void clearSpecial(); //clears special effects
     void giveLevelBlockSeq(std::string fname);
     void removeLevelBlockSeq(std::string fname);
 };
