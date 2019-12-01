@@ -5,13 +5,14 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <iostream>
 
 //forward declarations
-class Game;
-class Drawer;
+#include "game.h"
+#include "drawer.h"
 
 
-class Controller final{
+class Controller{
     bool textOnly;
     int seed;
     std::string scriptfile1;
@@ -27,8 +28,6 @@ class Controller final{
 
   public:
     Controller(bool textOnly, int seed, std::string scriptfile1, std::string scriptfile2, int startLevel); 
-    ~Controller();
-
     bool run(std::string line);
   
   private:

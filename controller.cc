@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include <iostream>
-#include <fstream>  //do I need this with IOstream?
+#include <fstream> 
 #include <sstream>
 
 #include "controller.h"
@@ -35,15 +35,12 @@ Controller::Controller(bool textOnly, int seed, std::string scriptfile1, std::st
         currentCommand{""}, 
         currentCommandArg{""},
         commandList{std::vector<std::string>{}} {
-
     commandList = push_commandNames(this->commandList);
+    std::make_unique<TextDrawer>(game.get());
     displays.emplace_back(std::make_unique<TextDrawer>(game.get()));
     if (!textOnly) displays.emplace_back(std::make_unique<GraphicsDrawer>(game.get()));
     for(auto &d : displays) d->updateDisplay();
 }
-
-//destructor
-Controller::~Controller() {}
 
 //only public method- main calls run() every time it reads input
 bool Controller::run(std::string line) {
@@ -96,16 +93,34 @@ void Controller::executeCommand() { //need multiplicity functionality
 
     } else if (currentCommand == "drop") {
         for (int i = 0; i < currentMultiplicity; ++i) {
+            
             bool clearTwoRows = game->drop();
             game->clearSpecial();
+
             if (clearTwoRows == true) { //prompt for special action
                 std::cout << "Please enter a special action: 'blind', 'heavy', or 'force'" << std::endl;
                 std::string action;
                 std::cin >> action;
-                if (action == "blind") {
-                    for(auto &d : displays) d->makeBlind();
+                if (action == "force") {
+                    std::cout << "Which block would you like to spawn on your opponents board?" << std::endl;
+                    std::string forceBlockType;
+                    std::cin >> forceBlockType;
+                    if (! ((forceBlockType == "J")
+                        || (forceBlockType == "L")
+                        || (forceBlockType == "T")
+                        || (forceBlockType == "O")
+                        || (forceBlockType == "I")
+                        || (forceBlockType == "S")
+                        || (forceBlockType == "Z"))) {
+                            std::cerr << "Bad block type." << std::endl;
+                            return;
+                            //add while loop to give player benefit of doubt
+                        }
+
+                    game->makeSpecial(action, forceBlockType);
+                } else {
+                    game->makeSpecial(action);
                 }
-                game->makeSpecial(action);
             }
         }
 
@@ -121,11 +136,11 @@ void Controller::executeCommand() { //need multiplicity functionality
     } else if (currentCommand == "random") {
         game->removeLevelBlockSeq();
     } else if (currentCommand == "sequence") {
-        // std::ifstream sequence{currentCommandArg.c_str()};
-        // std::string input;
-        // while (sequence >> input) { 
-        //     run(line);
-        // }
+        std::ifstream sequence{currentCommandArg.c_str()};
+        std::string input;
+        while (sequence >> input) { 
+            run(input);
+        }
     } else if (currentCommand == "I") {
         game->swapBlock("I");
     } else if (currentCommand == "J") {

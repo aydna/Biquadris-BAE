@@ -4,10 +4,12 @@
 #include <utility>
 
 class Block{
-    std::vector<std::pair<int,int>> pixels;
-    char color;
-    int levelSpawned;
-    int weight;
+    protected:
+        std::vector<std::pair<int,int>> pixels;
+    private:
+        char color;
+        int levelSpawned;
+        int weight;
 
     public:
         Block(std::vector<std::pair<int,int>> pixels, char color, int levelSpawned, int weight);
@@ -16,6 +18,7 @@ class Block{
         char getColor();
         int getLevelSpawned();
         int getWeight();
+        void increaseWeight(int inc);
 };
 
 #endif

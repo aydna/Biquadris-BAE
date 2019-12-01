@@ -13,3 +13,4 @@ void Block::setPixels(std::vector<std::pair<int,int>> newPixels){ pixels = newPi
 char Block::getColor(){ return color; }
 int Block::getLevelSpawned(){ return levelSpawned; }
 int Block::getWeight(){ return weight; }
+void Block::increaseWeight(int inc){ weight += inc; }

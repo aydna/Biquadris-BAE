@@ -37,14 +37,14 @@ void GraphicsDrawer::drawBoxes(int bs){
 int color = 0;
 void GraphicsDrawer::drawBlocks(int bs){
     //super slow, draws too many rectangles? 
-    for (int row = 0; row < p1.boardSize.first; row++){
-        for (int col = 0; col < p1.boardSize.second; col++) {
-            if (p1.grid[row][col] != p1.oldGrid[row][col]){
-                color = (p1.grid[row][col] == ' ') ? Xwindow::White : colors[p1.grid[row][col]];
+    for (int row = 0; row < p1->boardSize.first; row++){
+        for (int col = 0; col < p1->boardSize.second; col++) {
+            if (p1->grid[row][col] != p1->oldGrid[row][col]){
+                color = (p1->grid[row][col] == ' ') ? Xwindow::White : colors[p1->grid[row][col]];
                 w.fillRectangle(200 + (col * bs), 150 + (row * bs), bs, bs, color);
             }          
-            if (p2.grid[row][col] != p2.oldGrid[row][col]){
-                color = (p2.grid[row][col] == ' ') ? Xwindow::White : colors[p2.grid[row][col]];
+            if (p2->grid[row][col] != p2->oldGrid[row][col]){
+                color = (p2->grid[row][col] == ' ') ? Xwindow::White : colors[p2->grid[row][col]];
                 w.fillRectangle(700 + (col * bs), 150 + (row * bs), bs, bs, color);
             }      
         }
@@ -56,10 +56,10 @@ void GraphicsDrawer::drawNextBlock(int bs){
     w.drawString(550, 150, "Next:");
     for (int row = 0; row < 4; row++){
         for (int col = 0; col < 4; col++) {
-            color = (p1.nextBlock[row][col] == ' ') ? Xwindow::White : colors[p1.nextBlock[row][col]];
-            w.fillRectangle(50 + (col * bs), 200 + (row * bs), bs, bs, colors[p1.nextBlock[row][col]]);
-            color = (p2.nextBlock[row][col] == ' ') ? Xwindow::White : colors[p2.nextBlock[row][col]];
-            w.fillRectangle(550 + (col * bs), 200 + (row * bs), bs, bs, colors[p2.nextBlock[row][col]]);
+            color = (p1->nextBlock[row][col] == ' ') ? Xwindow::White : colors[p1->nextBlock[row][col]];
+            w.fillRectangle(50 + (col * bs), 200 + (row * bs), bs, bs, colors[p1->nextBlock[row][col]]);
+            color = (p2->nextBlock[row][col] == ' ') ? Xwindow::White : colors[p2->nextBlock[row][col]];
+            w.fillRectangle(550 + (col * bs), 200 + (row * bs), bs, bs, colors[p2->nextBlock[row][col]]);
         }
     }
 }
@@ -67,10 +67,10 @@ void GraphicsDrawer::drawNextBlock(int bs){
 void GraphicsDrawer::drawHeaders(int bs){
     w.fillRectangle(200, 50, 300, 50, Xwindow::White);
     w.fillRectangle(700, 50, 300, 50, Xwindow::White);
-    w.drawString(200, 50,  "Player1 SCORE:  " + std::to_string(p1.score));
-    w.drawString(200, 100, "Player1 LEVEL:  " + std::to_string(p1.level));
-    w.drawString(700, 50,  "Player2 SCORE:  " + std::to_string(p2.score));
-    w.drawString(700, 100, "Player2 LEVEL:  " + std::to_string(p2.level));
+    w.drawString(200, 50,  "Player1 SCORE:  " + std::to_string(p1->score));
+    w.drawString(200, 100, "Player1 LEVEL:  " + std::to_string(p1->level));
+    w.drawString(700, 50,  "Player2 SCORE:  " + std::to_string(p2->score));
+    w.drawString(700, 100, "Player2 LEVEL:  " + std::to_string(p2->level));
 }
 
 std::ostream& GraphicsDrawer::print(std::ostream& out){

@@ -1,15 +1,22 @@
 #include <memory>
 #include <iostream>
 #include <utility>
+#include <exception>
 #include "game.h"
 #include "board.h"
+#include "board_normal.h"
+#include "board_blind.h"
+#include "board_heavy.h"
+#include "board_force.h"
+#include "board_special.h"
 
+#include <iostream>
 
 Game::Game(int seed, std::string scriptfile1, std::string scriptfile2, int startLevel) :
     boardSize{std::pair<int,int>(18,11)}, 
     playerTurn{1}, 
-    b1{std::make_unique<Board>(seed, scriptfile1, startLevel)}, 
-    b2{std::make_unique<Board>(seed, scriptfile2, startLevel)} {
+    b1{std::make_unique<BoardNormal>(seed, scriptfile1, startLevel)}, 
+    b2{std::make_unique<BoardNormal>(seed, scriptfile2, startLevel)} {
         b1->spawnBlock();
     }
 
@@ -133,106 +140,61 @@ void Game::swapBlock(std::string type){
     }
 }
 
-void Game::makeSpecial(std::string type) {
-    
-    if (playerTurn == 1) {
-        std::unique_ptr<Board>& curr_board = b2;
-        //b2->makeSpecial(mult); // apply special board to opponent's board
-    }
-    else {
-        std::unique_ptr<Board>& curr_board = b1;
-        //b1->makeSpecial(mult);
-    }
-
-    if (type == "blind") {
-        curr_board{BlindBoard{std::move{curr_board}}};
-    }
-    else if (type == "force") {
-        curr_board{ForceBoard{std::move{curr_board}}};
-    }
-    else if (type == "heavy") {
-        curr_board{HeavyBoard{std::move{curr_board}}};
-    }
+void Game::makeSpecial(std::string type, std::string forceBlockType) {
 
     if (playerTurn == 1) {
-        playerTurn == 2;
-        b2->spawnBlock();
+        if (type == "blind") {
+            b2 = std::make_unique<BoardBlind>(std::move(b2));
+         }
+        else if (type == "force") {
+            b2 = std::make_unique<BoardForce>(std::move(b2));
+        }
+        else if (type == "heavy") {
+            b2 = std::make_unique<BoardHeavy>(std::move(b2));
+        }
     }
     else {
-        playerTurn == 1;
-        b1->spawnBlock();
+        if (type == "blind") {
+            b1 = std::make_unique<BoardBlind>(std::move(b1));
+         }
+        else if (type == "force") {
+            b1 = std::make_unique<BoardForce>(std::move(b1));
+        }
+        else if (type == "heavy") {
+            b1 = std::make_unique<BoardHeavy>(std::move(b1));
+        }
+    }
+
+    if (playerTurn == 1) {
+        playerTurn = 2;
+        b2->spawnBlock(forceBlockType);
+    }
+    else {
+        playerTurn = 1;
+        b1->spawnBlock(forceBlockType);
     }
 }
 
 
 void Game::clearSpecial() {
     if (playerTurn == 1) {
-        b2{std::move{b2->clearSpecial()}};
+        try {b2 = std::move(b2->clearSpecial()); }
+        catch (int e) {}
     }
     else {
-        b1{std::move{b1->clearSpecial()}};
+        try {b1 = std::move(b1->clearSpecial()); }
+        catch (int e) {}
     }
 }
 
 
-void Game::giveLevelBlockSeq(std::string fname) {}
-
-void removeLevelBlockSeq() {}
-
-
-
-
-
-/*
-
-//these methods are gabage, ill FIX IT later -Botao
-Game::Game(Display *d): 
-    d{d},
-    playerTurn{0}, 
-    b1{std::make_unique<Board>(0)},
-    b2{std::make_unique<Board>(1)}
-    {}
-
-void Game::spawnBlock(){
-    if (playerTurn == 0){
-        b1->spawnBlock();
+void Game::giveLevelBlockSeq(std::string filename) {
+    if (playerTurn == 1) {
+        b1->giveLevelBlockSeq(filename);
     }
-    else if (playerTurn == 1){
-        b2->spawnBlock();
+    else {
+        b2->giveLevelBlockSeq(filename);
     }
-    d->update(b1->getBlocks(),b2->getBlocks());
 }
 
-void Game::moveLeft(){
-    if (playerTurn == 0){
-        b1->moveLeft();
-    }
-    else if (playerTurn == 1){
-        b2->moveLeft();
-    }
-    d->update(b1->getBlocks(),b2->getBlocks());
-}
-
-void Game::moveRight(){
-    if (playerTurn == 0){
-        b1->moveRight();
-    }
-    else if (playerTurn == 1){
-        b2->moveRight();
-    }
-    d->update(b1->getBlocks(),b2->getBlocks());
-}
-
-void Game::drop(){
-    if (playerTurn == 0){
-        b1->drop();
-        playerTurn = 1;
-    }
-    else if (playerTurn == 1){
-        b2->drop();
-        playerTurn = 0;
-    }
-    d->update(b1->getBlocks(),b2->getBlocks());
-}
-
-*/
+void Game::removeLevelBlockSeq() {}
