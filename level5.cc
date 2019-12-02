@@ -5,14 +5,14 @@
 
 
 Level5::Level5(int seed, std::string file, bool useRandom): 
-        Level{seed, file, useRandom, 5, 0} {}
+        Level{seed, file, useRandom, 5, 1} {}
 
 Level5::~Level5() {}
 
 
 
 std::string Level5::spawnRandom() {
-    int gen = rand() % 13;
+    int gen = rand() % 12;
     if (gen < 1) {
         return "S";
 
@@ -46,10 +46,8 @@ std::string Level5::spawnRandom() {
     } else if (gen < 11) {
         return "branch";
 
-    } else if (gen < 12) {
+    } else {
         return "doughnut";
 
-    } else {
-        return "rand";
     }
 }

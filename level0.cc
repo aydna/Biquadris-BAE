@@ -9,8 +9,7 @@ Level0::Level0(int seed, std::string file, bool useRandom):
 
 Level0::~Level0() {}
 
-// lol
 std::string Level0::spawnRandom() {
-    return "spawnNorandom();";
+    return spawnNorandom();
 }
 

@@ -4,7 +4,7 @@
 #include <string>
 #include "level.h"
 
-class Block; //might give multiple declaration error
+class Block; 
 
 class Level2: public Level{
     public:

@@ -59,17 +59,20 @@ int main(int argc, char* argv[]) {
         fs.open("tests/" + storeFile + ".in", fstream::out);
     }
     
+
     //initizing our controller
     Controller controller{textOnly, seed, scriptfile1, scriptfile2, startLevel};
-    string line;
     bool gamePersists = true;
     cout << controller << endl;
 
     //main loop
+    string line;
     while (gamePersists && getline(cin, line)) {
         gamePersists = controller.run(line);
         cout << controller << endl;
-        if (storeRun) fs << line << endl ; // stores input
+        if (storeRun) {
+            fs << line << endl ; // stores input
+        }
     }
     
 }

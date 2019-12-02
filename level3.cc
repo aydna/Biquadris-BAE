@@ -5,12 +5,12 @@
 
 
 Level3::Level3(int seed, std::string file, bool useRandom): 
-        Level{seed, file, useRandom, 3, 1} {}
+        Level{seed, file, useRandom, 3, 1} {}   // note levels 3+ have weight 1
 
 Level3::~Level3() {}
 
 
-
+// random block generation
 std::string Level3::spawnRandom() {
     int gen = rand() % 9;
     if (gen < 2) {

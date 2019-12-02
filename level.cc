@@ -17,10 +17,6 @@
 #include "block_X.h"
 
 
-//FOR ETHEN
-// I tried fixing the segfault we were getting before
-// so i just replaced the vector of strings and the index with a filestream 
-// I added notes
 
 //ctor
 Level::Level(int seed, std::string file, bool useRandom, int levelNum, int levelWeight):
@@ -91,10 +87,7 @@ std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
 
     } else if (type == "doughnut") {
         return std::make_unique<BlockDoughnut>(levelNum, levelWeight);
-
-    // } else if (type == "rand") {
-    //     return std::make_unique<BlockRand>(levelNum, levelWeight);
-
+    
     } else if (type == "X") {
         return std::make_unique<BlockX>(levelNum, levelWeight);
 

@@ -5,7 +5,7 @@
 #include <string>
 #include "level.h"
 
-class Block; //might give multiple declaration error
+class Block; 
 
 class Level0: public Level{
     public:
@@ -13,7 +13,6 @@ class Level0: public Level{
         ~Level0();
 
         std::string spawnRandom() override;
-        //std::unique_ptr<Block> spawnBlock(std::string type) override;
 };
 
 

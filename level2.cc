@@ -10,7 +10,7 @@ Level2::Level2(int seed, std::string file, bool useRandom):
 Level2::~Level2() {}
 
 
-
+// random block generation
 std::string Level2::spawnRandom() {
     int gen = rand() % 7;
     if (gen < 1) {
