@@ -20,20 +20,14 @@ class Level{
 
         std::ifstream fileStream;
 
-        //std::vector<std::string> blockList;
-        //int blockListIndex;
-
     public:
         Level(int seed, std::string file, bool useRandom, int levelNum, int levelWeight);
         
-        virtual std::unique_ptr<Block> spawnBlock(std::string inBlock = "");
+        std::unique_ptr<Block> spawnBlock(std::string inBlock = "");
         virtual ~Level()=0;
 
         void giveLevelBlockSeq(std::string filename);
         void removeLevelBlockSeq();
-
-        void addHeaviness(int shift = 2);
-        void removeHeaviness(int shift = 2);
 
     private:
         virtual std::string spawnRandom() = 0;

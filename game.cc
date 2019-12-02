@@ -197,4 +197,11 @@ void Game::giveLevelBlockSeq(std::string filename) {
     }
 }
 
-void Game::removeLevelBlockSeq() {}
+void Game::removeLevelBlockSeq() {
+    if (playerTurn == 1) {
+        b1->removeLevelBlockSeq();
+    }
+    else {
+        b2->removeLevelBlockSeq();
+    }
+}

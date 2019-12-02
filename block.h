@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 
+//Block encodes information for the blocks that are spawned on the board
 class Block{
     protected:
         std::vector<std::pair<int,int>> pixels;

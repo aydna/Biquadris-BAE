@@ -6,6 +6,7 @@
 #include <string>
 #include "block.h"
 
+//used to encoded information about the board 
 struct BoardPixels{
     std::pair<int,int> cord;
     char color;

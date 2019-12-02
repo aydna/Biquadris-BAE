@@ -46,13 +46,6 @@ void Level::removeLevelBlockSeq() {
     useRandom = true;
 }
 
-void Level::addHeaviness(int shift) {
-    levelWeight += shift;
-}
-void Level::removeHeaviness(int shift) {
-    levelWeight -= shift;
-}
-
 std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
     std::string type;
     if (!useRandom){
