@@ -25,6 +25,7 @@ class Level{
         
         // spawnBlock(string) spawns the specified block type, or follows normal generation if nothing is passed
         std::unique_ptr<Block> spawnBlock(std::string inBlock = "");
+        std::string spawnNorandom();
         virtual ~Level()=0;
 
         // giveLevelBlockSeq(filename) tells the Level to generate blocks from a file, not randomly

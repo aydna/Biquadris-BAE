@@ -42,17 +42,23 @@ void Level::removeLevelBlockSeq() {
     useRandom = true;
 }
 
+std::string Level::spawnNorandom() {
+    std::string type;
+    if (!(fileStream >> type)){ // if this read failes, this means that EOF
+            fileStream = std::ifstream{sequenceFileName};   //reinit filestream
+            fileStream >> type;
+    }
+    return type;
+}
+
 std::unique_ptr<Block> Level::spawnBlock(std::string inBlock) {
     std::string type;
     if (!useRandom){
-        if (!(fileStream >> type)){ // if this read failes, this means that EOF
-            fileStream = std::ifstream{sequenceFileName};   //reinit filestream
-            fileStream >> type;
-        }
+        type = spawnNorandom();
     }
     else type = spawnRandom();
-
     if (inBlock.length() != 0) type = inBlock;
+
 
     //block type processing
     if (type == "S") {
