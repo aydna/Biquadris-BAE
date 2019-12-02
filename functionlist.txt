@@ -15,4 +15,5 @@ L
 O
 S
 T
+Z
 restart

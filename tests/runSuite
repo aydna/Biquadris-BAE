@@ -1,0 +1,67 @@
+#!/bin/bash
+
+for file in $(cat $1); do
+	if ! [ -r "${file}.out" ]; then
+		 >&2 echo "~${file}.out~ does not exist"
+		exit 1
+	fi
+	name=$(mktemp)
+	leak=0
+	if [ "$3" = "--valgrind" ]; then
+		if [ -r "${file}.in" ] && [ -r "${file}.args" ]; then
+			valgrind --leak-check=full -q --error-exitcode=123 $2 $(cat ${file}.args) < ${file}.in > ${name} 2> /dev/null
+		elif [ -r ${file}.in ]; then
+			valgrind --leak-check=full -q --error-exitcode=123 $2 < ${file}.in > ${name} 2> /dev/null
+		elif [ -r "${file}.args" ]; then
+			valgrind --leak-check=full -q --error-exitcode=123 $2 $(cat ${file}.args) > ${name} 2> /dev/null
+		else
+			valgrind --leak-check=full -q --error-exitcode=123 $2 > ${name}  2> /dev/null
+		leak=$?
+		fi
+
+	else
+		if [ -r "${file}.in" ] && [ -r "${file}.args" ]; then
+			$2 $(cat ${file}.args) < ${file}.in > ${name}
+		elif [ -r ${file}.in ]; then
+			$2 < ${file}.in > ${name}
+		elif [ -r "${file}.args" ]; then
+			$2 $(cat ${file}.args) > ${name} 
+		else
+			$2 > ${name}
+		fi
+	fi
+
+	if [ ${leak} -eq 123 ]; then
+		leak="LEAKED MEMORY"
+	else
+		leak="ALL MEMORY FREED"
+	fi
+
+	if ! cmp -s "${name}" "${file}.out"; then 
+		if [ "$3" = "--valgrind" ]; then
+			echo "Test failed: ${file} ~~~  ${leak}"
+		else
+			echo "Test failed: ${file}"
+		fi
+		echo "~Args~:"
+		if [ -r "${file}.args" ]; then
+			cat ${file}.args
+		fi
+		echo "~Input~:"
+		if [ -r "${file}.in" ]; then
+			cat ${file}.in
+		fi
+		echo "~~~Expected~~~:"
+		cat ${file}.out
+		echo "~~~Actual~~~:"
+		cat ${name}
+	else	
+		if [ "$3" = "--valgrind" ]; then
+			echo "Test passed: ${file} ~~~ ${leak}"
+		else
+			echo "Test passed: ${file}"
+		fi
+	fi
+	echo ""
+	rm ${name}
+done

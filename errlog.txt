@@ -1,0 +1,11 @@
+restart fucks up the players score
+
+heavy board automatically 2downs the block when it spawns
+
+score not reflected in graphic display? (needs more investigation)
+
+level 4 doesnt' spawn bitch block [FIXED]
+
+calling norandom [fname] finishes the current file stream before running the blocks from [fname]]
+
+LEEEEEEEEEEEEEEAKS everywhere [FIXED]

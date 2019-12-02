@@ -1,46 +1,37 @@
-//level1.cc
 #include "level1.h"
-#include <memory>
 #include <string>
 #include <cstdlib>
 
-#include "block_O.h"
-#include "block_T.h"
-#include "block_S.h"
-#include "block_Z.h"
-#include "block_J.h"
-#include "block_L.h"
-#include "block_I.h"
 
 
-Level1::Level1(std::string file, bool useRandom): 
-        Level{file, useRandom} {}
+Level1::Level1(int seed, std::string file, bool useRandom): 
+        Level{seed, file, useRandom, 1, 0} {}
 
 Level1::~Level1() {}
 
 
-
-std::unique_ptr<Block> Level1::spawnBlock() {
+// random block generation
+std::string Level1::spawnRandom() {
     int gen = rand() % 12;
     if (gen < 1) {
-        return std::make_unique<BlockS>();
+        return "S";
 
     } else if (gen < 2) {
-        return std::make_unique<BlockZ>();
+        return "Z";
 
     } else if (gen < 4) {
-        return std::make_unique<BlockI>();
+        return "I";
 
     } else if (gen < 6) {
-        return std::make_unique<BlockJ>();
+        return "J";
 
     } else if (gen < 8) {
-        return std::make_unique<BlockL>();
+        return "L";
 
     } else if (gen < 10) {
-        return std::make_unique<BlockO>();
+        return "O";
 
     } else {
-        return std::make_unique<BlockT>();
+        return "T";
     }
 }

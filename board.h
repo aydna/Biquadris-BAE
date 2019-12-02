@@ -3,26 +3,40 @@
 #include <vector>
 #include <memory>
 #include <utility>
+#include <string>
 #include "block.h"
-#include "level.h"
-#include "display.h"
+
+//used to encoded information about the board 
+struct BoardPixels{
+    std::pair<int,int> cord;
+    char color;
+};
 
 class Board{
-    int boardNum; //player 0 or 1
-    std::vector<std::unique_ptr<Block>> blocks;
-    std::unique_ptr<Level> currLevel;
-
+    
     public:
-        Board(int boardNum);
-        std::vector<std::unique_ptr<Block>> &getBlocks();
-        void spawnBlock();
-        void moveRight(int distance);
-        void moveLeft(int distance);
-        void moveDown(int distance);
-        void rotateCW(int times);
-        void rotateCCW(int times);
-        bool gameOver();
-        void drop();
+        Board();
+        virtual ~Board()=0;
+        virtual void spawnBlock(std::string type = "", int weight = 0)=0;
+        virtual void swapBlock(std::string type, int weight = 0)=0;
+        virtual void levelUp(int times)=0;
+        virtual void levelDown(int times)=0;
+        virtual void moveRight(int times)=0;
+        virtual void moveLeft(int times)=0;
+        virtual void moveDown(int times)=0;
+        virtual void rotateCW(int times)=0;
+        virtual void rotateCCW(int times)=0;
+        virtual int drop()=0;
+        virtual int getLevel()=0;
+        virtual int getScore()=0;
+        virtual std::vector<BoardPixels> getBlocks()=0;
+        virtual std::vector<BoardPixels> getNextBlock()=0;
+        virtual void checkGameOver(std::vector<std::pair<int,int>> pixels)=0;
+        virtual bool gameOver()=0;
+        virtual void giveLevelBlockSeq(std::string filename)=0;
+        virtual void removeLevelBlockSeq()=0;
+
+        virtual std::unique_ptr<Board>&& clearSpecial()=0;
 };
 
 #endif
