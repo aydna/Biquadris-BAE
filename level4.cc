@@ -9,7 +9,6 @@ Level4::Level4(int seed, std::string file, bool useRandom):
 
 Level4::~Level4() {}
 
-
 // random block generation
 std::string Level4::spawnRandom() {
     int gen = rand() % 9;
