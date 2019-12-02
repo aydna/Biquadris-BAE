@@ -16,6 +16,7 @@ class BoardNormal:public Board{
     std::unique_ptr<Block> nextBlock;
     std::unique_ptr<Level> currLevel;
     bool gameOverSwitch;
+    int roundsSinceClear = 0;
 
     int removeRow();
     std::vector<std::pair<int,int>> getBoardPixels(int offBack);

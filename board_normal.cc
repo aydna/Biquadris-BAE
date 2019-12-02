@@ -13,6 +13,7 @@
 #include "level5.h"
 #include "board.h"
 #include "board_normal.h"
+#include "block_dot.h"
 
 BoardNormal::BoardNormal(int seed, std::string scriptfile, int startLevel):
     level{startLevel},
@@ -217,8 +218,16 @@ void BoardNormal::rotateCCW(int times){
 
 //moves the block down as far as it go and then removes the rows that can be removed
 int BoardNormal::drop(){
-    moveDown(18); 
-    return removeRow();
+    moveDown(18);
+    int rowsRemoved = removeRow();
+    if (rowsRemoved == 0) ++roundsSinceClear;
+    else roundsSinceClear = 0;
+    if ((roundsSinceClear >= 5) && (level == 4)){
+        roundsSinceClear = 0;
+        blocks.emplace_back(std::make_unique<BlockDot>(4,0));
+        moveDown(18);
+    }
+    return rowsRemoved;
 }
 
 int BoardNormal::getLevel(){ return level; }
@@ -255,7 +264,6 @@ void BoardNormal::checkGameOver(std::vector<std::pair<int,int>> pixels){
         } 
     }
 }
-
 
 bool BoardNormal::gameOver(){ return gameOverSwitch; }
 
