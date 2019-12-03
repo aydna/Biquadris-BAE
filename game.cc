@@ -8,6 +8,8 @@
 #include "board_blind.h"
 #include "board_heavy.h"
 #include "board_force.h"
+#include "board_no_rotate.h"
+#include "board_upsidedown.h"
 #include "board_special.h"
 
 #include <iostream>
@@ -152,6 +154,12 @@ void Game::makeSpecial(std::string type, std::string forceBlockType) {
         else if (type == "heavy") {
             b2 = std::make_unique<BoardHeavy>(std::move(b2));
         }
+        else if (type == "norotate") {
+            b2 = std::make_unique<BoardNoRotate>(std::move(b2));
+        }
+        else if (type == "upsidedown") {
+            b2 = std::make_unique<BoardUpsidedown>(std::move(b2));
+        }
     }
     else {
         if (type == "blind") {
@@ -162,6 +170,12 @@ void Game::makeSpecial(std::string type, std::string forceBlockType) {
         }
         else if (type == "heavy") {
             b1 = std::make_unique<BoardHeavy>(std::move(b1));
+        }
+        else if (type == "norotate") {
+            b1 = std::make_unique<BoardNoRotate>(std::move(b1));
+        }
+        else if (type == "upsidedown") {
+            b1 = std::make_unique<BoardUpsidedown>(std::move(b1));
         }
     }
 

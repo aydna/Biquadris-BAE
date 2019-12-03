@@ -22,8 +22,8 @@ void BoardBlind::rotateCCW(int times) { my_board->rotateCCW(times); }
 int BoardBlind::drop() { return my_board->drop(); }
 int BoardBlind::getLevel() { return my_board->getLevel(); }
 int BoardBlind::getScore() { return my_board->getScore(); }
-//adds some ? to the board
-std::vector<BoardPixels> BoardBlind::getBlocks() { 
+
+std::vector<BoardPixels> BoardBlind::getBlocks() { //adds ? to the board to blind the player
     std::vector<BoardPixels> bp = my_board->getBlocks();
     for (int row = 4; row <= 15; ++row){
         for (int col = 2; col <= 8; ++col){

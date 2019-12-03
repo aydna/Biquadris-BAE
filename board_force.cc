@@ -10,7 +10,7 @@ BoardForce::BoardForce(std::unique_ptr<Board>&& my_board) :
 
 std::unique_ptr<Board>&& BoardForce::clearSpecial() { return std::move(my_board); }
 
-void BoardForce::spawnBlock(std::string type, int weight)  { 
+void BoardForce::spawnBlock(std::string type, int weight)  { //swaps the current block to a new type of block
     my_board->spawnBlock(type,weight);
     my_board->swapBlock(type,weight);
 }

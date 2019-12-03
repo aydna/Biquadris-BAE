@@ -10,7 +10,7 @@ BoardHeavy::BoardHeavy(std::unique_ptr<Board>&& my_board) :
 
 std::unique_ptr<Board>&& BoardHeavy::clearSpecial() { return std::move(my_board); }
     
-void BoardHeavy::spawnBlock(std::string type, int weight) { my_board->spawnBlock(type,2+weight);  }
+void BoardHeavy::spawnBlock(std::string type, int weight) { my_board->spawnBlock(type,2+weight); } //adds 2 to the block's weight
 void BoardHeavy::swapBlock(std::string type, int weight) { my_board->swapBlock(type,weight); }
 
 void BoardHeavy::levelUp(int times) { my_board->levelUp(times); }

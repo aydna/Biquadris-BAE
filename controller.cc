@@ -119,11 +119,11 @@ void Controller::executeCommand() {
             game->clearSpecial();
 
             if (clearTwoRows == true) { //prompt for special action
-                std::cout << "Please enter a special action: 'blind', 'heavy', or 'force'" << std::endl;
+                std::cout << "Please enter a special action: 'blind', 'heavy', 'force', 'norotate', or 'upsidedown'" << std::endl;
                 std::string action;
 
                 while (std::cin >> action) {    // checks for invalid input
-                    if (action == "blind" || action == "heavy" || action == "force") {
+                    if (action == "blind" || action == "heavy" || action == "force" || action == "norotate" || action == "upsidedown") {
                         break;
                     } else  {
                         std::cout << "Invalid special action. Try again." << std::endl;
