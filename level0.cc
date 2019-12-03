@@ -12,4 +12,3 @@ Level0::~Level0() {}
 std::string Level0::spawnRandom() {
     return spawnNorandom();
 }
-

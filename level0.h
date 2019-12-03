@@ -15,5 +15,4 @@ class Level0: public Level{
         std::string spawnRandom() override;
 };
 
-
 #endif

@@ -39,4 +39,3 @@ build heavy setter in level
 TODO
 game.drop returns a bool to ctrler - true if we neeed to prompt for special action input
     fix game->makespecial
-    

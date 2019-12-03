@@ -5,5 +5,3 @@
 
 BoardSpecial::BoardSpecial(std::unique_ptr<Board>&& my_board):
     Board{}, my_board{std::move(my_board)} {}
-
-

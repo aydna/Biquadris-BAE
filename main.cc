@@ -75,4 +75,14 @@ int main(int argc, char* argv[]) {
         }
     }
     
+    //prints out highscore
+    cout << "GAME OVER" << endl;
+    std::ifstream highScores{"high_score.txt"};
+    std::vector<int> scoreList;
+    int num;
+    while(highScores >> num)scoreList.emplace_back(num);
+    int counter = 1;
+    for (auto score : scoreList){
+        cout << "HIGH SCORE " << counter++ << ": " << score << endl;
+    }
 }

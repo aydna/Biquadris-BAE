@@ -2,6 +2,7 @@
 #include <utility>
 #include <memory>
 #include <iostream>
+#include <fstream>
 #include <map>
 #include "window.h"
 #include "drawer.h"
@@ -74,11 +75,27 @@ void GraphicsDrawer::drawHeaders(int bs){
     w.drawString(700, 100, "Player2 LEVEL:  " + std::to_string(p2->level));
 }
 
+
+void GraphicsDrawer::drawHighScore(){
+    std::ifstream highScores{"high_score.txt"};
+    std::vector<int> scoreList;
+    int num;
+    while(highScores >> num) scoreList.emplace_back(num);
+    highScores.close();
+    int counter = 1;
+    hs.drawString(20, 20,  "HIGH SCORE TABLE:");
+    for (auto score : scoreList){
+        hs.drawString(40, 20 + (counter) * 30, "HIGH SCORE " + std::to_string(counter) + ": " + std::to_string(score));
+        counter++;
+    }
+}
+
 std::ostream& GraphicsDrawer::print(std::ostream& out){
     int bs = 30;
     drawBoxes(bs);
     drawHeaders(bs);
     drawBlocks(bs);
     drawNextBlock(bs);
+    drawHighScore();
     return out;
 }

@@ -21,3 +21,4 @@ sclean:
 makeclean:
 	make
 	make sclean
+	

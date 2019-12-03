@@ -63,6 +63,28 @@ bool Controller::run(std::string line) {
         executeCommand();
         for(auto &d : displays) d->updateDisplay();
     }
+    //for high score
+    if (game->gameOver()){
+        std::ifstream oldHighScores{"high_score.txt"};
+        std::vector<int> scoreList;
+        int num;
+        while(oldHighScores >> num) scoreList.emplace_back(num);
+        oldHighScores.close();
+        std::ofstream newHighScores{"high_score.txt"};
+        bool stored = false;
+        for (auto score : scoreList){
+            if ((game->getBoard(1)->getScore() > score) && !stored){
+                newHighScores << game->getBoard(1)->getScore() << std::endl;
+                stored = true;
+            }
+            else if ((game->getBoard(2)->getScore() > score) && !stored){
+                newHighScores << game->getBoard(2)->getScore() << std::endl;
+                stored = true;
+            }
+            newHighScores << score << std::endl;
+        }
+    }
+
     return !(game->gameOver());
 }
 
@@ -135,12 +157,12 @@ void Controller::executeCommand() {
                     std::string forceBlockType;
                     while (std::cin >> forceBlockType) {
                         if ((forceBlockType == "J")
-                                || (forceBlockType == "L")
-                                || (forceBlockType == "T")
-                                || (forceBlockType == "O")
-                                || (forceBlockType == "I")
-                                || (forceBlockType == "S")
-                                || (forceBlockType == "Z")) {
+                            || (forceBlockType == "L")
+                            || (forceBlockType == "T")
+                            || (forceBlockType == "O")
+                            || (forceBlockType == "I")
+                            || (forceBlockType == "S")
+                            || (forceBlockType == "Z")) {
                             break;
                         } else {
                             std::cout << "Bad block type. Try again." << std::endl;

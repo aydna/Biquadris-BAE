@@ -38,5 +38,4 @@ class Level{
         virtual std::string spawnRandom() = 0;
 };
 
-
 #endif
