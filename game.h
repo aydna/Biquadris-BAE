@@ -15,7 +15,6 @@ class Game {
     std::unique_ptr<Board> b2;
 
     public:
-    // Ctor v1.0 (accomodates for multiple players (2 for phase0))
 
     Game(int seed, std::string scriptfile1, std::string scriptfile2, int startLevel);
     int getPlayer(); //gets curr player's turn
@@ -23,16 +22,16 @@ class Game {
     std::unique_ptr<Board>& getBoard(int player);
     void levelUp(int lvl);
     void levelDown(int lvl);
-    bool drop();
+    bool drop(); //ends turn
     void rotateCW(int mult);
     void rotateCCW(int mult);
     void moveRight(int mult);
     void moveLeft(int mult);
     void moveDown(int mult);
-    void swapBlock(std::string type);
+    void swapBlock(std::string type); // swaps next block to be of type 'type'
     void makeSpecial(std::string type, std::string forceBlockType = ""); //special effects
     void clearSpecial(); //clears special effects
-    void giveLevelBlockSeq(std::string filename);
+    void giveLevelBlockSeq(std::string filename); 
     void removeLevelBlockSeq();
 
 };

@@ -17,6 +17,8 @@ struct playerImpl{
     int level;
 };
 
+
+// View class of MVC
 class Drawer {
     protected:
     // can exchange this for array of however many players
@@ -29,8 +31,8 @@ class Drawer {
     public:
     Drawer(Game* game);
     virtual std::ostream& print(std::ostream& out)=0;
+    // Updates display to reflect most recent board state
     void updateDisplay();
-    void makeBlind();
     virtual ~Drawer()=0;
 };
 
