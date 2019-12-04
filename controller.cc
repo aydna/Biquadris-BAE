@@ -33,6 +33,7 @@ std::vector<std::string> push_commandNames(std::vector<std::string> list) {
     list.push_back("T");
     list.push_back("Z");
     list.push_back("restart");
+    list.push_back("help");
     return list;
 }
 
@@ -46,10 +47,11 @@ Controller::Controller(bool textOnly, int seed, std::string scriptfile1, std::st
         startLevel{startLevel},
         game{std::make_unique<Game>(seed, scriptfile1, scriptfile2, startLevel)}, 
         currentMultiplicity{1}, 
-        currentCommand{""}, 
+        currentCommand{"help"}, 
         currentCommandArg{""},
         commandList{std::vector<std::string>{}} {
     commandList = push_commandNames(this->commandList);
+    executeCommand();   //prints the help screen
     std::make_unique<TextDrawer>(game.get());
     displays.emplace_back(std::make_unique<TextDrawer>(game.get()));
     if (!textOnly) displays.emplace_back(std::make_unique<GraphicsDrawer>(game.get()));
@@ -222,6 +224,14 @@ void Controller::executeCommand() {
         displays.emplace_back(std::make_unique<TextDrawer>(game.get()));
         if (!textOnly) displays.emplace_back(std::make_unique<GraphicsDrawer>(game.get()));
         for(auto &d : displays) d->updateDisplay();
+    } 
+    else if (currentCommand == "help") {
+        std::ifstream infile{"helpscreen.txt"};
+        std::string input;
+        while (getline(infile, input)) { 
+            std::cout << input << std::endl;
+        }
+        infile.close();
     }
 }
 
