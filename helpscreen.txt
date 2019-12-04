@@ -1,0 +1,28 @@
+ _____________________
+| Welcome to Biquaris |
+ ---------------------
+        \    ^__^
+         \   (oo)\_______
+          \  (__)\       )\/\
+                 ||----w |
+                 ||     ||
+
+List of commands (and their shortcuts):
+1. left (l)                 --move left 1
+2. right (r)                --move right 1
+3. clockwise (cl)           --rotate clockwise
+4. counterclockwise (co)    --rotate counterclockwise
+5. down (d)                 --move down 1
+6. drop (dr)                --drop the block
+7. levelup (levelu)         --level up
+8. leveldown (leveld)       --level down
+9. help (help)              --bring up this screen
+10. restart (restart)
+
+Developer Tools
+1. norandom [filename] (norandom)   --spawn blocks from the order
+                                    listed in [filename]
+2. random (random)                  --spawn blocks randomly
+3. sequence [filename] (sequence)   --execute the commands 
+                                    listed in [filename]
+4. I/J/L/O/S/T/Z                    --spawn the block of your choosing
