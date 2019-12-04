@@ -67,8 +67,8 @@ void GraphicsDrawer::drawNextBlock(int bs){
 }
 
 void GraphicsDrawer::drawHeaders(int bs){
-    w.fillRectangle(200, 50, 300, 50, Xwindow::White);
-    w.fillRectangle(700, 50, 300, 50, Xwindow::White);
+    w.fillRectangle(200, 20, 300, 80, Xwindow::White);
+    w.fillRectangle(700, 20, 300, 80, Xwindow::White);
     w.drawString(200, 50,  "Player1 SCORE:  " + std::to_string(p1->score));
     w.drawString(200, 100, "Player1 LEVEL:  " + std::to_string(p1->level));
     w.drawString(700, 50,  "Player2 SCORE:  " + std::to_string(p2->score));
